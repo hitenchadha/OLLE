@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/common_secure.xhtml">
+	
+<ui:define name="center">
+
+			<h4>Click on the "Available Forms" button to see the list of forms available to submit</h4>
+			<h:form>
+				<p:focus />
+					<p:dataList value="#{formsmb.submittedForms}" var="form" type="ordered">
+				        <f:facet name="header">
+				            Submitted Forms
+				        </f:facet>
+				        
+				        <h:commandLink action="#{formsmb.download}" value="#{form.formName}, for  #{form.fullname}">
+    							<f:setPropertyActionListener target="#{formsmb.selectedStudentId}" value="#{form.studentId}" />
+						</h:commandLink>
+				       
+				    </p:dataList>
+		    
+				<p:commandButton id="submitCreateForm" label="Available Forms" type="submit"
+					value="Available Forms" action="/secured/fomrs/availableforms.xhtml" alt="Create"
+					ajax="false" />
+		    
+			</h:form>
+
+</ui:define>
+</ui:composition>

@@ -1,0 +1,53 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="center">
+
+
+        <h2> Application Links </h2>
+        <div class="Separator" />
+        <p:commandLink id="id1" value="404" action="/common/404.xhtml" /><br />
+        <p:commandLink id="id2" value="Access Denied" action="/common/access-denied.xhtml" /><br />
+        <p:commandLink id="id3" value="Empty-page" action="/common/empty-page.xhtml" /><br />
+        <p:commandLink id="id4" value="Error" action="/common/error.xhtml" /><br />
+        <p:commandLink id="id5" value="Login" action="/common/login.xhtml" /><br />
+        <p:commandLink id="id6" value="Promotion Page" action="/common/promotion-page.xhtml" /><br />
+        <div class="Separator" />
+        <h1>Profile</h1>
+        Click on the links below to manage your profile.
+        <p:commandLink id="contact" value="Contact details:" action="/secured/contact.xhtml" />
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Click here to view/update your contact details.</p>
+
+        <p:commandLink id="identification" value="Identiication details:" action="/secured/identification.xhtml" />
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Click here to view/update your identification details.</p>
+
+        <p:commandLink id="spouse" value="Spouse details:" action="/secured/spouse.xhtml" />
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">You do not have your spouse details saved. Please click here to create your spouse/significant other record.</p>
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Click here to view/update your spouse/significant other details.</p>
+
+        <p:commandLink id="child" value="Child details:" action="/secured/child.xhtml" />
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">You may create multiple child records (one for each child).</p>
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Click here to create child record.</p>
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Select child record from drop down to view/update.</p>
+        <p:commandLink id="emergency" value="Emergency contact details:" action="/secured/emergency.xhtml" />
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">You may create multiple emergency contacts.</p>
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Click here to create a new emergency contact.</p>
+        <p
+            style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Select emergency contact from the drop down to view/update his/her details.</p>
+
+    </ui:define>
+    
+</ui:composition>

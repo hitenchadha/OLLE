@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="center">
+        <h:form>
+            <p:focus />
+            <p:toolbar class="BlueBody Fs12 FontBold" style="margin-bottom: 10px">
+                <f:facet name="left" >
+                    <h2 style="margin-top:0;margin-bottom:0;"><i class="fa fa-user Fs25" /> Activate your Account</h2>
+                </f:facet>
+                <f:facet name="right">
+
+                </f:facet>
+            </p:toolbar>
+            <i class="fa fa-info-circle Fs17" /> <h:outputLabel value=" Enter the Account activation key you received in your email to activate your account." />
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+
+            <h:panelGrid id="tablegrid" columns="3" cellpadding="5" cellspacing="5">
+                <p:column><h:outputLabel value="Activation Key:" /> </p:column>
+                <p:column>
+                    <p:inputText id="activationKey" value="#{accountbean.activationKey}"
+                                 required="true" requiredMessage="Please enter activation key" size="36" >
+
+                    <p:watermark for="activationKey" value="Activation Key" /></p:inputText>&#160;
+                </p:column>
+                <p:column>	
+                    <p:commandButton id="submitSignup" label="Activate" type="submit"
+                                     value="Activate" action="#{accountcontroller.activateUserAccount()}" alt="Activate"
+                                     ajax="false" style="border: 0"/> 
+                </p:column>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+	<title>OLLE</title>
+
+
+	<style>
+#menubutton {
+	height: auto;
+	width: 25px;
+	float: left;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	margin-left: 20px;
+}
+
+#menubutton i {
+	color: #fff;
+	font-size: 20px;
+	margin: 0px auto 0px auto;
+	vertical-align: middle;
+}
+
+#menubutton:hover i, #menubutton:active i, #menubutton:focus i {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+#menubody {
+	width: 270px;
+	height: auto;
+	background-color: #fff;
+	position: absolute;
+	overflow: hidden;
+	border-radius: 5px;
+	margin-top: 30px;
+	display: none;
+	box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+	-webkit-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+#menubody.active {
+	display: block;
+}
+
+#menubody li {
+	display: block;
+	padding: 0px;
+}
+
+#menubody li a {
+	display: block;
+	padding: 15px 20px;
+	color: #567a84;
+	font-size: 16px;
+}
+
+#menubody li a:hover, #menubody li a:active, #menubody li a:focus {
+	background-color: #f2f2f2;
+}
+</style>
+</h:head>
+
+<h:body style="margin: 0px; background-color:#29506B;" styleClass="BlueBody PopupMenu">
+
+	<div class="Container100 PosFixed"
+		style="background-color: #29506B; z-index: 999;">
+		<div class="EmptyBox10"></div>
+		<div class="Wid90 OvHidden MarAuto">
+			<h:graphicImage name="images/logo-white.svg" library="volt-layout" style="height:24px; float:left;" />
+
+			<a id="menubutton"><i class="fa fa-bars"></i></a>
+			<ul class="" style="padding: 0px;" id="menubody">
+				<li class=""><a href="#volt-infoArea" class=""><i class="fa fa-user-secret Fs20" /> Privacy</a></li>
+				<li class=""><a href="#volt-pricingtables" class=""><i class="fa fa-file-text Fs20" />  Terms</a></li>
+				<li class=""><a href="#volt-features" class=""><i class="fa fa-user-secret Fs20" />  About Us</a></li>
+				<li class=""><a href="#volt-customers" class=""><i class="fa fa-apple Fs20" /> iOS OLLE App</a></li>
+				<li class=""><a href="#volt-contact" class=""><i class="fa fa-android Fs20" /> Android OLLE App</a></li>
+			</ul>
+		</div>
+		<div class="EmptyBox10"></div>
+	</div>
+
+	<!-- -->
+
+	<div class="Container100 NoIndent" id="volt-highlight"
+		style="background-color: #29506B; padding: 6rem 0px;">
+
+		<h1 class="FontVoltRegular Fs30 White TexAlCenter">EASING YOUR DATA!</h1>
+		<div class="Wid80 MarAuto">
+
+			<div class="Container33 Responsive50">
+				<div class="Container100 TexAlCenter">
+
+					<h:graphicImage name="images/avatar1.svg" library="volt-layout"
+						style="width:150px; height:150px;" />
+					<div class="EmptyBox10"></div>
+					<span class="DispBlock White FontVoltRegular">Filling same information over and over again - Why? Let's make it a simplistic.</span>
+					<div class="EmptyBox10"></div>
+					<span class="FontVoltSemiBold DispBlock">— Filling forms is a breeze</span>
+				</div>
+			</div>
+			<div class="Container33 Responsive50">
+				<div class="Container100 TexAlCenter">
+
+					<h:graphicImage name="images/avatar2.svg" library="volt-layout"
+						style="width:150px; height:150px;" />
+					<div class="EmptyBox10"></div>
+					<span class="DispBlock White FontVoltRegular">"We realized
+						Volt was a great tool that would give us more insights on both a
+						strategic and technical level, so we could make more intelligent
+						business decisions."</span>
+					<div class="EmptyBox10"></div>
+					<span class="FontVoltSemiBold DispBlock">— Ease of use !</span>
+				</div>
+			</div>
+			<div class="Container33 Responsive50">
+				<div class="Container100 TexAlCenter">
+
+					<h:graphicImage name="images/avatar1.svg" library="volt-layout"
+						style="width:150px; height:150px;" />
+					<div class="EmptyBox10"></div>
+					<span class="DispBlock White FontVoltRegular">Open API driven approach allows you to connect your 
+                                            existing applications without having to overhaul your complete system.</span>
+					<div class="EmptyBox10"></div>
+					<span class="FontVoltSemiBold DispBlock">— Connecting your Systems</span>
+				</div>
+			</div>
+
+		</div>
+		<div class="EmptyBox10"></div>
+		
+		<!--  -->
+		<div class="Wid90 OvHidden MarAuto">
+			<div class="Container100">
+				<div class="Wid50 MarAuto ui-fluid Responsive100">
+					<div class="Container50 Responsive100">
+						<p:button value="Create free account"
+							styleClass="OrangeButton" outcome="/account/signup"/>
+					</div>
+					<div class="Container50 Responsive100">
+						<p:button value="Login !" styleClass="GreenButton" outcome="/account/login"/>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+
+	<h:outputStylesheet name="css/core-layout.css" library="volt-layout" />
+	<h:outputStylesheet name="css/font-awesome.css" library="volt-layout" />
+	<h:outputStylesheet name="css/animate.css" library="volt-layout" />
+	<h:outputStylesheet name="css/volt-layout.css" library="volt-layout" />
+	<h:outputStylesheet name="css/volt-font.css" library="volt-layout" />
+
+	<script>
+            // FNC for detecting for click outside of any elements ============== 
+            $.fn.clickOff = function (callback, selfDestroy) {
+                var clicked = false;
+                var parent = this;
+                var destroy = selfDestroy || true;
+
+                parent.click(function () {
+                    clicked = true;
+                });
+
+                $(document).click(function (event) {
+                    if (!clicked) {
+                        callback(parent, event);
+                    }
+                    if (destroy) {
+                    }
+                    ;
+                    clicked = false;
+                });
+            };
+
+            var menubtn = $(document.getElementById("menubutton")),
+                menubody = $(document.getElementById("menubody")),
+                menustatus = true,
+                menuButtonClick = false;
+
+            menubtn.on("click", function () {
+                menuButtonClick = true;
+
+                if (menustatus) {
+                    menubody.addClass('active');
+                    menustatus = false;
+                } else {
+                    menubody.removeClass('active');
+                    menustatus = true;
+                }
+            });
+
+            menubody.clickOff(function (e) {
+                if (menuButtonClick) {
+                    menuButtonClick = false;
+                }
+                else {
+                    menubody.removeClass('active');
+                    menustatus = true;
+                }
+            });
+        </script>
+</h:body>
+
+</html>

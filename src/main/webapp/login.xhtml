@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>OLLE: Login </title>
+        <ui:insert name="head" />
+    </h:head>
+
+    <h:body styleClass="LeadenBody">
+        <h:form>
+        <div class="Container100">
+            <div class="Container100">
+                <div class="Wid30 OvHidden DispBlock MarAuto WidAutoOnMobile" style="margin-top:7%;">
+                    <div class="Card ShadowEffect">
+                        
+                        <div class="Container100">
+                            <div class="Card OrangeBack White TexAlCenter Fs20 FontVoltBold">Log In</div>
+                            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                        </div>
+                        
+                        <div class="Container100 TexAlCenter Responsive100">
+						<div class="Card TexAlCenter">
+							<i class="icon-unlocked2 Fs60 TealGreen"></i>
+							<div class="EmptyBox10"></div>
+							<p:inputText styleClass="Wid90" placeholder="Username" value="#{accountbean.username}"
+                                         required="true" requiredMessage="Please enter username"/>
+							<div class="EmptyBox10"></div>
+							<p:password styleClass="Wid90" placeholder="Password" value="#{accountbean.password}"
+                                        required="true" requiredMessage="Please enter password"/>
+							<div class="Separator"></div>
+                                                        <p:commandButton id="submitLogin" label="Login" type="submit"
+                                                            value="Login" class="fa fa-unlock GreenButton"
+                                                            action="#{accountcontroller.authenticateUser()}" alt="Login" />
+							<p:button value="Log In" icon="fa fa-unlock"
+								styleClass="GreenButton" href="dashboard.xhtml"  />
+							<div class="SeparatorFull"></div>
+							<span class="Fs14"> <p:link
+									value="Forgot Credentials" outcome="/account/forgotcredentials" /> | <p:link
+									value="Signup" outcome="/account/signup" /></span>
+						</div>
+					</div>
+                        
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        </h:form>
+        <h:outputStylesheet name="css/core-layout.css" library="volt-layout" />
+        <h:outputStylesheet name="css/animate.css" library="volt-layout" />
+        <h:outputStylesheet name="css/volt-font.css" library="volt-layout" />
+        <h:outputStylesheet name="css/font-awesome.css" library="volt-layout" />
+        <h:outputStylesheet name="css/volt-layout.css" library="volt-layout" />
+        
+    </h:body>
+
+</html>

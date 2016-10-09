@@ -1,0 +1,79 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml">
+	
+	<ui:define name="center">
+			<h1>LCPS CHANGE OF ADDRESS FORM</h1>
+			<p style="font-style: bold; text-align: left; margin: 5px 10px; font-size: 16px;">Fill-in the student(s) details as required in the form below.</p>
+			<h:form>
+				<p:focus />
+				<h:panelGrid id="tablegrid">
+					<p:messages id="messages" showDetail="true" autoUpdate="true" />
+					<p:row>
+
+						<h:outputLabel value="Student ID#" />
+						<p:inputText id="studentId" value="#{formsmb.lcpsCoAFormC10.studentId}"
+							required="true" requiredMessage="Please enter Student ID#" size="6"></p:inputText>
+					</p:row>
+					<p:row>
+
+						<h:outputLabel value="Name of Student" />
+						<p:inputText id="fullname" value="#{formsmb.lcpsCoAFormC10.fullname}"
+							required="true" requiredMessage="Please enter fullname"
+							size="18"></p:inputText>
+					</p:row>
+					<p:row>	
+						<h:outputLabel value="Grade" />
+						<p:inputText id="grade" value="#{formsmb.lcpsCoAFormC10.grade}"
+							required="true" requiredMessage="Please enter Grade" size="10" />
+						<p:watermark for="grade" value="Grade" />
+					</p:row>
+					<p:row>	
+
+						<h:outputLabel value="Birth Date" />
+						<p:inputText id="birthdate" value="#{formsmb.lcpsCoAFormC10.birthdate}"
+							required="true" requiredMessage="Please enter birthdate" size="10" />
+						<p:watermark for="birthdate" value="birthdate" />
+
+					</p:row>
+
+					<p:row>
+						<h:outputLabel for="parentname" value="Parent’s Name" />
+						<p:inputText id="parentname" value="#{formsmb.lcpsCoAFormC10.parentname}"
+							 required="true"
+							requiredMessage="Please enter parent's name" size="18" />
+					</p:row>
+					<p:row>
+						<h:outputLabel for="oldaddress" value="Old Address" />
+						<p:inputText id="oldaddress" value="#{formsmb.lcpsCoAFormC10.oldaddress}"
+							 required="true"
+							requiredMessage="Please enter old address" size="30" />
+					</p:row>
+					<p:row>
+						<h:outputLabel for="newaddress" value="New Address" />
+						<p:inputText id="newaddress" value="#{formsmb.lcpsCoAFormC10.newaddress}"
+							 required="true"
+							requiredMessage="Please enter new address" size="30" />
+					</p:row>
+					<p:row>
+						<h:outputLabel for="phone" value="Phone" />
+						<p:inputMask id="phone" value="#{formsmb.lcpsCoAFormC10.phone}"
+							 required="true"
+							requiredMessage="Please enter phone" size="14" mask="(999) 999-9999"/>
+					</p:row>
+
+					<f:facet name="footer">
+						<p:commandButton id="submitForm" label="Submit" type="submit"
+							value="submit" action="#{formsmb.createUpdateForm}" alt="Submit"
+							ajax="false" />
+							
+						<p:commandButton id="saveForm" label="Save" type="submit"
+							value="Save" action="#{formsmb.createUpdateForm}" alt="Save"
+							ajax="false" />
+					</f:facet>
+				</h:panelGrid>
+			</h:form>
+	</ui:define>
+</ui:composition>
