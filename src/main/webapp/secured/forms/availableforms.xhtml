@@ -1,0 +1,23 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml">
+	
+<ui:define name="center">
+			<h1>Click on the link associated with the form you would like to work with</h1>
+			<h:form>
+				<p:focus />
+					<p:dataList value="#{formsmb.availableForms}" var="fmetadata" type="ordered">
+				        <f:facet name="header">
+				            Forms List Available
+				        </f:facet>
+				        
+				        <h:commandLink action="#{fmetadata.doView}"> #{fmetadata.formName} </h:commandLink>
+				        
+				    </p:dataList>
+		    
+			</h:form>
+
+</ui:define>
+</ui:composition>

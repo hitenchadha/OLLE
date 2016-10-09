@@ -1,0 +1,42 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common.xhtml">
+
+    <ui:define name="center">
+        <div id="page" class="clearfix">
+            <div class="centerfocusbox"
+                 style="margin-bottom: 50px; padding-top: 0px; height: 550px;">
+                <h1>Login</h1>
+
+                <h:form>
+                    <p:focus />
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" />
+                    <h:panelGrid id="tablegrid" columns="2" cellpadding="5" cellspacing="5">						
+                            <h:outputLabel value="Username" />
+                            <p:inputText id="username" value="#{accountbean.username}"
+                                         required="true" requiredMessage="Please enter username"
+                                         size="18" />
+
+                            <h:outputLabel value="Password" />
+                            <p:password id="password" value="#{accountbean.password}"
+                                        required="true" requiredMessage="Please enter password"
+                                        size="18" />
+                            
+                            <p:commandButton id="submitLogin" label="Login" type="submit"
+                                             value="Login" ajax="false"
+                                             action="#{accountcontroller.authenticateUser()}" alt="Login" />
+
+                        <f:facet name="footer">
+                            <p:link id="forgotCredentials" value="Forgot Credentials"
+                                    outcome="forgotcredentials" /> | <p:link id="signup"
+                                    value="Signup" outcome="signup" />
+                        </f:facet>
+                    </h:panelGrid>
+                </h:form>
+            </div>
+        </div>
+    </ui:define>
+
+</ui:composition>

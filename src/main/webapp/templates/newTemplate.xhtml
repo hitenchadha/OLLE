@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelets Template</title>
+    </h:head>
+
+    <h:body id="body" class="LeadenBody" style="margin: 0px;">
+        <h:outputStylesheet name="css/core-layout.css" library="volt-layout" />
+        <h:outputStylesheet name="css/animate.css" library="volt-layout" />
+        <h:outputStylesheet name="css/volt-font.css" library="volt-layout" />
+        <h:outputStylesheet name="css/font-awesome.css" library="volt-layout" />
+        <h:outputStylesheet name="css/volt-layout.css" library="volt-layout" />
+
+        <div id="top">
+            <ui:insert name="top"><p:toolbar class="BlueBody White">
+                                <f:facet name="left" >
+                                    <a href="/OLLE/"><i class="icon-lightbulb Fs40" />Easing my data!</a>
+                                </f:facet>
+                                <f:facet name="right" >
+                                        <a href="/OLLE/account/login.xhtml"><i class="fa fa-key Fs12" /> Login</a> |
+                                        <a href="/OLLE/account/signup.xhtml"><i class="fa fa-user Fs12" /> Signup</a> 
+
+                                </f:facet>
+                            </p:toolbar></ui:insert>
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">Left</ui:insert>
+            </div>
+            <div>
+                <div id="right">
+                    <ui:insert name="right">Right</ui:insert>
+                </div>
+                <div id="content" class="right_content">
+                    <ui:insert name="content">Content</ui:insert>
+                </div>
+            </div>
+        </div>
+        <div id="bottom">
+            <ui:insert name="bottom"> <p:layout>
+                        <p:layoutUnit position="west" size="215" style="border:0;" class="Fs13">
+                            <h:outputText value="Privacy | Terms | About us" />
+                        </p:layoutUnit>
+                        <p:layoutUnit position="east" size="215" style="border:0;" class="TexAlCenter">
+                            <i class="fa fa-apple Fs20" /> | <i class="fa fa-android Fs20" />
+                        </p:layoutUnit>
+                        <p:layoutUnit position="center" style="border:0;">
+                        </p:layoutUnit>
+                    </p:layout></ui:insert>
+        </div>
+
+    </h:body>
+
+</html>

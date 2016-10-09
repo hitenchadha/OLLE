@@ -1,0 +1,297 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="center">
+        <h:form>
+            <p:focus />
+            <p:toolbar class="BlueBody Fs12 FontBold" style="margin-bottom: 10px">
+                <f:facet name="left" >
+                    <h2 style="margin-top:0;margin-bottom:0;"><i class="fa fa-child Fs25" /> Child details</h2>
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton id="addchildbuttontop" label="Add Child"
+                                     type="submit" value="Add Child" icon="fa fa-child" class="LimeBack FontVoltBold"
+                                     action="#{childbean.addchild}" alt="Add Child" />
+                    <p:commandButton id="updatebuttontop" label="Update"
+                                     type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
+                                     action="#{childbean.submit}" alt="Update"/>
+
+                </f:facet>
+            </p:toolbar>
+
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+            <h3 style="margin-top:7px;margin-bottom:10px;"><i class="fa fa-tag Fs17" /> Identity</h3>
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>Child Name: </p:column>
+                <p:column colspan="3">
+                    <p:inputText id="firstname" value="#{childbean.firstname}"
+                                 size="18" >
+                        <p:watermark for="firstname" value="Firstname" />
+                    </p:inputText>&#160;
+                    <p:inputText id="middlename" value="#{childbean.middlename}"
+                                 size="10" >
+                        <p:watermark for="middlename" value="Middlename" />
+                    </p:inputText>&#160;
+                    <p:inputText id="lastname" value="#{childbean.lastname}"
+                                 size="18" >
+                        <p:watermark for="lastname" value="Lastname" />
+                    </p:inputText>
+                </p:column>
+            </h:panelGrid>
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>Social Security #: </p:column>
+                <p:column>
+                    <p:inputMask id="ssn" value="#{childbean.ssn}" size="12"
+                                 mask="999-99-9999" style="vertical-align:middle;float:right;align:right;" />
+                </p:column>
+                <p:column>Gender: </p:column>
+                <p:column>
+                    <p:inputText id="gender" value="#{childbean.gender}" size="12" style="vertical-align:middle;float:right;align:right;" />
+                </p:column>
+
+                <p:column>Birth Certificate #: </p:column>
+                <p:column>
+                    <p:inputText id="birthcertificatenumber"
+                                 value="#{identificationbean.birthcertificatenumber}" size="15" style="vertical-align:middle;float:right;align:right;" />&#160;
+                    <p:watermark for="birthcertificatenumber"
+                                 value="Birth Certficate #" />
+                </p:column>
+                <p:column>Issuing State: </p:column>
+                <p:column>
+                    <p:selectOneMenu id="birthcertificatestate"
+                                     value="#{selectOneViewMenu.state}" style="vertical-align:middle;float:right;align:right;" >
+                        <f:selectItem itemLabel="Select State" itemValue="" />
+                        <f:selectItems value="#{selectOneViewMenu.states}" />
+                    </p:selectOneMenu>&#160;
+                </p:column>
+
+                <p:column>Issue Date: </p:column>
+                <p:column>
+                    <p:calendar id="birthcertificateissuedate"
+                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true"
+                                size="15" style="vertical-align:middle;float:right;align:right;" />&#160;
+                    <p:watermark for="birthcertificateissuedate" value="Date" />
+                </p:column>
+                <p:column>Birth Date: </p:column>
+                <p:column>
+                    <p:calendar id="birthdate" value="#{calendarView.date9}"
+                                pattern="MM-dd-yyyy" mask="true" size="15" style="vertical-align:middle;float:right;align:right;" />
+                    <p:watermark for="birthdate" value="Date" />
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+
+            <h3 style="margin-top:0;margin-bottom:10px;"><i class="fa fa-institution Fs17" /> School</h3>
+            <h:panelGrid columns="2" style=" margin-left: 10px">
+                <p:column>School Name:&#160;</p:column>
+                <p:column>
+                    <p:inputText id="schoolname" value="#{childbean.schoolname}"
+                                 size="50" />
+                </p:column>
+                <p:column>Student ID #:&#160;</p:column>
+                <p:column>
+                    <p:inputText id="studentid" value="#{childbean.studentid}"
+                                 size="15" />
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+            <h3 style="margin-top:0;margin-bottom:10px;"><i class="fa fa-phone Fs17" /> Phone</h3>
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>
+                    Home Phone:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputMask id="homephone" value="#{childbean.homephone}"
+                                 mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
+                </p:column>
+                <p:column>
+                    Work Phone:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputMask id="workphone" value="#{childbean.workphone}"
+                                 mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
+                </p:column>
+                <p:column>
+                    Mobile Phone:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputMask id="mobilephone" value="#{childbean.mobilephone}"
+                                 mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
+                </p:column>
+                <p:column>
+                    Other Phone:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputMask id="otherphone" value="#{childbean.otherphone}"
+                                 mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
+                </p:column>
+
+            </h:panelGrid>
+            <div class="Separator" />
+            <h3 style="margin-top:0;margin-bottom:10px;"><i class="fa fa-envelope Fs17" /> Email</h3>
+            <h:panelGrid columns="2" style=" margin-left: 10px">
+                <p:column>
+                    Personal Email:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="homeemail" value="#{childbean.homeemail}"
+                                 validatorMessage="Invalid spouses personal email format"
+                                 size="50" style="vertical-align:middle;float:right;align:right;" >
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </p:inputText>
+                </p:column>
+
+                <p:column>
+                    Work Email:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="workemail" value="#{childbean.workemail}"
+                                 validatorMessage="Invalid spouses work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                    </p:inputText>
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+            <h3 style="margin-top:0;margin-bottom:10px;"><i class="fa fa-building Fs17" /> Address</h3>
+            <p:tabView  style=" margin-left: 5px; margin-right: 5px">
+                <p:tab title="Home">
+                    <h:panelGrid columns="1">    
+                        <p:column>
+                            <p:inputText id="homeaddressline1"
+                                         value="#{childbean.homeaddressline1}" size="35" />
+                            <p:watermark for="homeaddressline1" value="Address Line 1" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="homeaddressline2"
+                                         value="#{childbean.homeaddressline2}" size="35" />
+                            <p:watermark for="homeaddressline2" value="Address Line 2" />
+                        </p:column>
+                        <p:column>
+                            
+                            <p:inputText id="homecity" value="#{childbean.homecity}" size="10" />&#160;
+                            <p:watermark for="homecity" value="City" />
+                            <p:selectOneMenu id="homestate" value="#{selectOneViewMenu.state}"
+                                             style="vertical-align:middle;" >
+                                <f:selectItem itemLabel="Select State" itemValue="" />
+                                <f:selectItems value="#{selectOneViewMenu.states}" />
+                            </p:selectOneMenu>&#160;
+
+                            <p:inputText id="homezip" value="#{childbean.homezip}"
+                                         size="4" />
+                            <p:watermark for="homezip" value="Zip" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="homecountry" value="#{childbean.homecountry}"
+                                         size="12" />
+                            <p:watermark for="homecountry" value="Country" />
+                        </p:column>
+                    </h:panelGrid>
+                </p:tab>
+
+                <p:tab title="Work">
+                    <h:panelGrid columns="1">    
+                        <p:column>
+                            <p:inputText id="workaddressline1"
+                                         value="#{childbean.workaddressline1}" size="35" />
+                            <p:watermark for="workaddressline1" value="Address Line 1" />
+                        </p:column><p:column>
+                            <p:inputText id="workaddressline2"
+                                         value="#{childbean.workaddressline2}" size="35" />
+                            <p:watermark for="workaddressline2" value="Address Line 2" />
+                        </p:column>
+                        <p:column>
+                            
+                            <p:inputText id="workcity" value="#{childbean.workcity}" size="10" />&#160;
+                            <p:watermark for="workcity" value="City" />
+                            <p:selectOneMenu id="workstate" value="#{selectOneViewMenu.state}"
+                                             style="vertical-align:middle;" >
+                                <f:selectItem itemLabel="Select State" itemValue="" />
+                                <f:selectItems value="#{selectOneViewMenu.states}" />
+                            </p:selectOneMenu>&#160;
+
+                            <p:inputText id="workzip" value="#{childbean.workzip}"
+                                         size="4" />
+                            <p:watermark for="workzip" value="Zip" />
+                        </p:column><p:column>
+                            <p:inputText id="workcountry" value="#{childbean.workcountry}"
+                                         size="12" />
+                            <p:watermark for="workcountry" value="Country" />
+                        </p:column>
+                    </h:panelGrid>
+                </p:tab>
+
+                <p:tab title="Mailing">
+                    <h:panelGrid columns="1"> 
+                        <p:column>
+                            <p:inputText id="mailingaddressline1"
+                                         value="#{childbean.mailingaddressline1}" size="35" />
+                            <p:watermark for="mailingaddressline1" value="Address Line 1" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="mailingaddressline2"
+                                         value="#{childbean.mailingaddressline2}" size="35" />
+                            <p:watermark for="mailingaddressline2" value="Address Line 2" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="mailingcity" value="#{childbean.mailingcity}"
+                                         size="10" />&#160;
+                            <p:watermark for="mailingcity" value="City" />
+                            <p:selectOneMenu id="mailingstate"
+                                             value="#{selectOneViewMenu.state}" style="vertical-align:middle;" >
+                                <f:selectItem itemLabel="Select State" itemValue="" />
+                                <f:selectItems value="#{selectOneViewMenu.states}" />
+                            </p:selectOneMenu>&#160;
+                            <p:inputText id="mailingzip" value="#{childbean.mailingzip}"
+                                         size="4" />
+                            <p:watermark for="mailingzip" value="Zip" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="mailingcountry"
+                                         value="#{childbean.mailingcountry}" size="12" />
+                            <p:watermark for="mailingcountry" value="Country" />
+                        </p:column>
+                    </h:panelGrid>
+                </p:tab>
+
+                <p:tab title="Billing">
+                    <h:panelGrid columns="1"> 
+                        <p:column>
+                            <p:inputText id="billingaddressline1"
+                                         value="#{childbean.billingaddressline1}" size="35" />
+                            <p:watermark for="billingaddressline1" value="Address Line 1" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="billingaddressline2"
+                                         value="#{childbean.billingaddressline2}" size="35" />
+                            <p:watermark for="billingaddressline2" value="Address Line 2" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="billingcity" value="#{childbean.billingcity}"
+                                         size="10" />&#160;
+                            <p:watermark for="billingcity" value="City" />
+                            <p:selectOneMenu id="bstate" value="#{selectOneViewMenu.state}"
+                                             style="vertical-align:middle;" >
+                                <f:selectItem itemLabel="Select State" itemValue="" />
+                                <f:selectItems value="#{selectOneViewMenu.states}" />
+                            </p:selectOneMenu>&#160;
+                            <p:inputText id="billingzip" value="#{childbean.billingzip}"
+                                         size="4" />
+                            <p:watermark for="billingzip" value="Zip" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="billingcountry"
+                                         value="#{childbean.billingcountry}" size="12" />
+                            <p:watermark for="billingcountry" value="Country" />
+                        </p:column>
+                    </h:panelGrid>
+                </p:tab>
+            </p:tabView>
+        </h:form>        
+    </ui:define>
+</ui:composition>

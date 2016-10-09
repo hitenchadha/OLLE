@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="center">
+        <h:form>
+            <p:focus />
+            <p:toolbar class="BlueBody Fs12 FontBold">
+                <f:facet name="left" >
+                    <h2 style="margin-top:0;margin-bottom:0;" ><i class="fa fa-search Fs25" /> Search/Browse Forms</h2>
+                </f:facet>
+                
+            </p:toolbar>
+
+            
+            <h:panelGrid columns="2" style="margin-top: 10px;margin-left: 10px;margin-right: 10px;">
+                <p:column><p:inputText id="search" value="#{searchbean.searchquery}"
+                                       size="70" >
+                        <p:watermark id="searchid" for="search" value="eg: Form 2345A"/>
+                    </p:inputText>
+                </p:column>
+                <p:column>
+                   <p:commandButton id="updatebuttontop" label="Search"
+                                     type="submit"  value="Search" icon="fa fa-search"
+                                     action="#{searchbean.submit}" alt="Search" style="border: 0"/>
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+            <h:panelGrid columns="2" width="90%" style="margin-left: 10px;margin-right: 10px;">
+                <p:column><h3 style="margin-top:7px;margin-bottom:10px;">Browse</h3></p:column>
+                <p:column></p:column>
+                <p:column><p:link id="L1" href="\">Loudoun County Public Schools Form 1050a </p:link></p:column>
+                <p:column><p:link id="L2" href="\">Northern Virgnia DMV 1999v1 </p:link></p:column>
+                <p:column><p:link id="L3" href="\">Loudoun County Public Schools Form 1050c </p:link></p:column>
+                <p:column><p:link id="L4" href="\">Loudoun County Public Schools Form 1050d </p:link></p:column>
+                <p:column><p:link id="L5" href="\">Northern Virgnia DMV 1999-v1 </p:link></p:column>
+                <p:column><p:link id="L6" href="\">Northern Virgnia DMV 2001-v2 </p:link></p:column>
+                <p:column><p:link id="L7" href="\">Loudoun County Public Schools Form 1053a </p:link></p:column>
+                <p:column><p:link id="L8" href="\">Loudoun County Public Schools Form 1054a </p:link></p:column>
+                <p:column><p:link id="L9" href="\">Loudoun County Public Schools Form 1055a </p:link></p:column>
+                <p:column><p:link id="L10" href="\">Loudoun County Public Schools Form 1055a </p:link></p:column>
+            </h:panelGrid>
+        </h:form>        
+    </ui:define>
+</ui:composition>
+

@@ -1,0 +1,214 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:define name="center">
+
+        <h:form>
+            <p:focus />
+            <p:toolbar class="BlueBody Fs12 FontBold" style="margin-bottom: 10px">
+                <f:facet name="left" >
+                    <h2 style="margin-top:0;margin-bottom:0;"><i class="fa fa-tag Fs25" /> Identification details</h2>
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton id="updatebuttontop" label="Update"
+                                     type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
+                                     action="#{identificationbean.submit}" alt="Update" />
+                </f:facet>
+            </p:toolbar>
+
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+
+            <h3 ><i class="fa fa-phone Fs17" /> General</h3>
+            <h:panelGrid columns="1" style=" margin-left: 10px">
+                <p:column>
+                    Social Security #:&#160;
+                    <p:inputMask id="ssn" value="#{identificationbean.ssn}" size="18"
+                                 mask="999-99-9999" />
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+            <h3 ><i class="fa fa-birthday-cake Fs17" /> Birth details</h3>
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>
+                    Birth Certificate #:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="birthcertificatenumber"
+                                 value="#{identificationbean.birthcertificatenumber}" size="15" />
+                    <p:watermark for="birthcertificatenumber"
+                                 value="Birth Certficate #" />&#160;
+                </p:column>
+                <p:column>
+                    Issuing State:&#160;
+                </p:column>
+                <p:column>
+                    <p:selectOneMenu id="birthcertificatestate" value="#{selectOneViewMenu.state}"
+                                     style="vertical-align:middle;" >
+                        <f:selectItem itemLabel="Select State" itemValue="" />
+                        <f:selectItems value="#{selectOneViewMenu.states}" />
+                    </p:selectOneMenu>&#160;
+                </p:column>
+
+                <p:column>
+                    Issue Date:&#160;
+                </p:column>
+                <p:column>
+                    <p:calendar id="birthcertificateissuedate"
+                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true"
+                                size="15" />
+                    <p:watermark for="birthcertificateissuedate" value="Date" />&#160;
+                </p:column>
+                <p:column>
+                    Birth Date:&#160;
+                </p:column>
+                <p:column>
+                    <p:calendar id="birthdate" value="#{calendarView.date9}"
+                                pattern="MM-dd-yyyy" mask="true" size="15" />
+                    <p:watermark for="birthdate" value="Date" />
+                </p:column>
+            </h:panelGrid>
+
+            <div class="Separator" />
+            <h3 ><i class="fa fa-credit-card Fs17" /> Driver's license</h3>
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>
+                    Driver License #:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="driverlicensenumber"
+                                 value="#{identificationbean.driverlicensenumber}" size="15" />
+                    <p:watermark for="driverlicensenumber" value="DL #" />
+                </p:column>
+                <p:column>
+                    Issuing State:&#160;
+                </p:column>
+                <p:column>
+                    <p:selectOneMenu id="driverlicensestate" value="#{selectOneViewMenu.state}"
+                                     style="vertical-align:middle;" >
+                        <f:selectItem itemLabel="Select State" itemValue="" />
+                        <f:selectItems value="#{selectOneViewMenu.states}" />
+                    </p:selectOneMenu>&#160;
+                </p:column>
+
+                <p:column>
+                    Issue Date:&#160;
+                </p:column>
+                <p:column>
+                    <p:calendar id="driverlicenseissuedate"
+                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true" size="15" />
+                    <p:watermark for="driverlicenseissuedate" value="Date" />
+                </p:column>
+                <p:column>
+                    Expiration date:&#160;
+                </p:column>
+                <p:column>
+                    <p:calendar id="driverlicenseexpirationdate"
+                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true" size="15" />
+                    <p:watermark for="driverlicenseexpirationdate" value="Date" />
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+            <h3 ><i class="fa fa-columns Fs17" /> Passport details</h3>
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>
+                    Passport #:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="passportnumber" value="#{identificationbean.passportnumber}"
+                                 size="15" />
+                    <p:watermark for="passportnumber" value="Passport #" />&#160;
+                </p:column>
+                <p:column>
+                    Issuing Office:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="passportoffice" value="#{identificationbean.passportoffice}"
+                                 size="15" />
+                    <p:watermark for="passportoffice" value="Issuing Office" />
+                </p:column>
+
+                <p:column>
+                    Issue Date:&#160;
+                </p:column>
+                <p:column>
+                    <p:calendar id="passportissuedate" value="#{calendarView.date9}"
+                                pattern="MM-dd-yyyy" mask="true" size="15" />
+                    <p:watermark for="passportissuedate" value="Date" />&#160;
+                </p:column>
+                <p:column>
+                    Expiration Date:&#160;
+                </p:column>
+                <p:column>
+                    <p:calendar id="passportexpirationdate"
+                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true"
+                                size="15" />
+                    <p:watermark for="passportexpirationdate" value="Date" />
+                </p:column>
+
+                <p:column>
+                    Issuing Country:&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="passportcountry"
+                                 value="#{identificationbean.passportcountry}" size="15" />
+                    <p:watermark for="passportcountry" value="Issuing Country" />
+                </p:column>
+                <p:column>
+                    <h:outputLabel value="" />
+                    <h:outputLabel value="" />
+                </p:column>
+            </h:panelGrid>
+            <div class="Separator" />
+            <h3 ><i class="fa fa-medkit Fs17" /> Medical details</h3>						
+            <h:panelGrid columns="4" style=" margin-left: 10px">
+                <p:column>
+                    <h:outputLabel for="insurancenumber" value="Insurance #" />&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="insurancenumber"
+                                 value="#{identificationbean.firstname}" size="15"></p:inputText>&#160;
+                </p:column><p:column>
+                    <h:outputLabel for="groupnumber" value="Group #" />&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="groupnumber" value="#{identificationbean.firstname}"
+                                 size="15" />
+                </p:column>
+
+                <p:column>
+                    <h:outputLabel for="insurancename" value="Insurance Name" />&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="insurancename" value="#{calendarView.date9}"
+                                 size="18" />
+                </p:column>
+                <p:column>
+                    <h:outputLabel for="insurancephone" value="Insurance Phone" />&#160;
+                </p:column>
+                <p:column>
+                    <p:inputMask id="insurancephone" value="#{identificationbean.phone}"
+                                 mask="(999) 999-9999" size="15" />
+                </p:column>
+
+                <p:column>
+                    <h:outputLabel for="doctorname" value="Issuing Country" />&#160;
+                </p:column>
+                <p:column>
+                    <p:inputText id="doctorname" value="#{identificationbean.firstname}"
+                                 size="18" />
+                </p:column>
+                <p:column>
+                    <h:outputLabel for="doctorphone" value="Doctor Phone" />&#160;
+                </p:column>
+                <p:column>
+                    <p:inputMask id="doctorphone" value="#{identificationbean.phone}"
+                                 mask="(999) 999-9999" size="18" />
+                </p:column>
+            </h:panelGrid>
+        </h:form>
+    </ui:define>
+</ui:composition>

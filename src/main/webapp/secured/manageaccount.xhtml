@@ -1,0 +1,93 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="center">
+        <h:form>
+            <p:focus />
+            <p:toolbar class="BlueBody Fs12 FontBold" style="margin-bottom: 10px">
+                <f:facet name="left" >
+                    <h2 style="margin-top:0;margin-bottom:0;"><i class="icon-vcard Fs30" /> Manage Account</h2>
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton id="updatebuttontop" label="Update"
+                                     type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
+                                     action="#{accountcontroller.manageUserAccount()}" alt="Update"/>
+
+                </f:facet>
+            </p:toolbar>
+            <h:outputLabel value="You
+            may update your information below and click Update." />
+            <p:messages id="messages" showDetail="true" autoUpdate="true" />
+
+            <h:panelGrid id="tablegrid2" columns="2" cellpadding="5" cellspacing="5">
+
+                <p:column><h:outputLabel value="Name:" /> </p:column>
+                <p:column>
+
+                    <p:inputText id="firstName" value="#{accountbean.firstName}"
+                                 required="true" requiredMessage="Please enter firstname"
+                                 size="18">
+                        <p:watermark for="firstName" value="Firstname" /></p:inputText>&#160;
+
+                        <p:inputText id="lastName" value="#{accountbean.lastName}"
+                                 required="true" requiredMessage="Please enter lastname" size="18" >
+                        <p:watermark for="lastName" value="Lastname" /> </p:inputText>
+                </p:column>
+
+                <p:column>	<h:outputLabel value="Mobile Phone:" /> </p:column>
+                <p:column colspan="2">
+                    <p:inputMask id="phone" value="#{accountbean.phone}"
+                                 mask="(999) 999-9999" size="18" /> 
+                </p:column>
+
+                <p:column>	<h:outputLabel for="emailaddress" value="Email:" /> </p:column>
+                <p:column colspan="2">
+                    <p:inputText id="email" value="#{accountbean.email}"
+                                 required="true" requiredMessage="Please enter your email"
+                                 validatorMessage="Invalid email format" size="50"  >
+                        <f:validateRegex
+                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                        <p:ajax event="blur" listener="#{accountcontroller.validateUserEmail()}"
+                                update="messages" />
+                    </p:inputText> 
+                </p:column>
+
+            </h:panelGrid>
+            <h:outputLabel value="Note: Your username is unique and cannot be changed. Password should be at least 8 characters long." />
+
+
+            <h:panelGrid id="tablegrid1" columns="2" cellpadding="5" cellspacing="5">
+                <p:column><h:outputLabel for="username" value="Username:" /></p:column>
+                <p:column>
+                    <p:inputText id="username" value="#{accountbean.username}" disabled="true" size="18" />
+                </p:column>
+
+                <p:column><h:outputLabel for="password" value="Password:" /></p:column>
+                <p:column><p:password id="password" value="#{accountbean.password}"
+                                      required="true" requiredMessage="Please enter password"
+                                      feedback="true"
+                                      validatorMessage="Password should be at least 8 characters long"
+                                      size="18">
+                        <f:validateLength minimum="8" />
+                    </p:password>
+                </p:column>
+
+                <p:column><h:outputLabel for="confirmpassword" value="Confirm Password:" /></p:column>
+                <p:column><p:password id="confirmpassword"
+                                      required="true"
+                                      requiredMessage="Please enter confirm password" feedback="true"
+                                      promptLabel="Please re-enter password"
+                                      validatorMessage="Password should match Confirm Password"
+                                      size="18" />
+                </p:column>
+
+            </h:panelGrid>
+            
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+
