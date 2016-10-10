@@ -14,14 +14,14 @@
                 <f:facet name="right">
                     <p:commandButton id="updatebuttontop" label="Update"
                                      type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
-                                     action="#{accountcontroller.manageUserAccount()}" alt="Update"/>
+                                     action="#{accountcontroller.manageUserAccount()}" alt="Update" update="growl"/>
 
                 </f:facet>
             </p:toolbar>
             <h:outputLabel value="You
             may update your information below and click Update." />
             <p:messages id="messages" showDetail="true" autoUpdate="true" />
-
+            <p:growl id="growl" showDetail="true" sticky="true" />
             <h:panelGrid id="tablegrid2" columns="2" cellpadding="5" cellspacing="5">
 
                 <p:column><h:outputLabel value="Name:" /> </p:column>
@@ -67,7 +67,7 @@
 
                 <p:column><h:outputLabel for="password" value="Password:" /></p:column>
                 <p:column><p:password id="password" value="#{accountbean.password}"
-                                      required="true" requiredMessage="Please enter password"
+                                      
                                       feedback="true"
                                       validatorMessage="Password should be at least 8 characters long"
                                       size="18">
@@ -77,8 +77,7 @@
 
                 <p:column><h:outputLabel for="confirmpassword" value="Confirm Password:" /></p:column>
                 <p:column><p:password id="confirmpassword"
-                                      required="true"
-                                      requiredMessage="Please enter confirm password" feedback="true"
+                                      feedback="true"
                                       promptLabel="Please re-enter password"
                                       validatorMessage="Password should match Confirm Password"
                                       size="18" />

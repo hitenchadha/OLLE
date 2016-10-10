@@ -13,7 +13,7 @@ public interface ApplicationConstants {
 
     public static final String ACCOUNT_URL = "/rest/account/";
     public static final String SIGNUP_URL = "/rest/account/createuseraccount/";
-    public static final String LOGIN_URL = "/rest/account/authenticateuser/";
+    public static final String LOGIN_URL = "/rest/account/login/";
     public static final String FORGOTCREDENTIAL_URL = "/rest/account/forgotcredential/";
     public static final String MANAGEACCOUNT_URL = "/rest/account/manageuseraccount/";
     public static final String VALIDATEEMAIL_URL = "/rest/account/validateuseremail/";

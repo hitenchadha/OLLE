@@ -39,7 +39,10 @@ import org.codehaus.jettison.json.JSONException;
 import com.infotech.olle.util.ConsumeJSON;
 import com.infotech.olle.util.Mail;
 import com.infotech.olle.util.SessionBean;
+import com.infotech.olle.util.UserSession;
 import java.util.Date;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 
 @ManagedBean(name = "accountcontroller")
 @SessionScoped
@@ -53,6 +56,7 @@ public class AccountController implements Serializable {
     private static final Logger log = Logger.getLogger(AccountController.class.getName());
     private static final long serialVersionUID = 1L;
     public boolean r;
+    private String forgot;
 
     /**
      * * TO DO **
@@ -60,12 +64,21 @@ public class AccountController implements Serializable {
     // mobile phone activation
     // assign roles if account created via invitation
     // audit trail
+    // mail services
     public AccountController() {
 
     }
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public String getForgot() {
+        return forgot;
+    }
+
+    public void setUserid(String forgot) {
+        this.forgot = forgot;
     }
 
     // AJAX call from JSF page on blur event
@@ -144,9 +157,9 @@ public class AccountController implements Serializable {
             // check if account with Email/Username exists
             if (validateUserEmail()) { // if false, it means email exists; Do not proceed!
                 if (validateUsername()) { // if false, it means email exists; Do not proceed!
-                    account.setStatus("1");
+                    account.setStatus(1);
                     account.setActivationKey(UUID.randomUUID().toString());
-                    account.setCreateDate(new Date());
+                    // account.setCreateDate(new Date());
                     Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
 
                     String jsonAccount = gson.toJson(account);
@@ -165,7 +178,7 @@ public class AccountController implements Serializable {
                     OutputStream os = conn.getOutputStream();
                     os.write(jsonAccount.getBytes());
                     os.flush();
-
+log.info("");
                     if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
                         throw new RuntimeException(
                                 "Failed : HTTP error code : "
@@ -183,10 +196,10 @@ public class AccountController implements Serializable {
 
                     conn.disconnect();
 
-                    account = new Account();
+                    //account = new Account();
                     // Clear the sessionscoped values from the browser
                     FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-                    return "signupconfirmation.xhtml?faces-redirect=true";
+                    return "activation.xhtml?faces-redirect=true";
 
                 }
                 return targetURI;
@@ -248,45 +261,69 @@ public class AccountController implements Serializable {
     }
 
     public String authenticateUser() {
-        String targetURI = "/secured/dashboard.xhtml?faces-redirect=true";
+        String targetURI = "/secured/dashboard.xhtml";
 
         try {
+            UserCredentials authenticate = new UserCredentials(StringEscapeUtils.escapeHtml4(account.getUsername().trim().toUpperCase()), account.getPassword());
 
-            String strQuery = StringEscapeUtils.escapeHtml4(account.getUsername().trim().toUpperCase()) + "/" + account.getPassword();
-            ConsumeJSON cjson = new ConsumeJSON(LOGIN_URL, strQuery, false);
-            String strJSONValue = cjson.getResult();
-            JSONObject jObj = new JSONObject(strJSONValue);
-            switch (jObj.getString("r")) {
-                case "2":
+            Gson gson = new GsonBuilder().create();
+
+            String jsonAccount = gson.toJson(authenticate);
+
+            URL url = new URL(SessionBean.getRequest().getScheme()
+                    + "://" + SessionBean.getRequest().getServerName()
+                    + ":" + SessionBean.getRequest().getServerPort()
+                    + SessionBean.getRequest().getContextPath()
+                    + LOGIN_URL);
+log.info(url.toString());
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json");
+log.info(jsonAccount);
+            OutputStream os = conn.getOutputStream();
+            os.write(jsonAccount.getBytes());
+            os.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                throw new RuntimeException(
+                        "Failed : HTTP error code : "
+                        + conn.getResponseCode());
+            }
+
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader((conn.getInputStream())));
+
+            String output;
+            StringBuffer jsonAPIResponse = new StringBuffer();
+
+            while ((output = br.readLine()) != null) {
+                System.out.println(output);
+                jsonAPIResponse.append(output);
+            }
+
+            conn.disconnect();
+            log.info("disconnected");
+            
+            Type sessionType =  new TypeToken<UserSession>(){}.getType();
+            UserSession uSession = (UserSession) gson.fromJson(jsonAPIResponse.toString(), sessionType);
+            account = uSession.getAccount();
+            
+            // return "activation.xhtml?faces-redirect=true";
+            log.info(account.getStatus() + "");
+            switch (account.getStatus()) {
+                case 2:
                     // Active Account
-
-                    HttpSession userSession = SessionBean.getSession();
-                    account.setUserid(jObj.getInt("userid"));
-                    account.setUsername(jObj.getString("username"));
-                    account.setFirstName(jObj.getString("firstname"));
-                    account.setLastName(jObj.getString("lastname"));
-                    account.setPhone(jObj.getString("phone"));
-                    account.setEmail(jObj.getString("email"));
-                    /*               
-                    userSession.setAttribute("username", StringEscapeUtils.escapeHtml4(account.getUsername().trim().toUpperCase()));
-                    userSession.setAttribute("firstname", jObj.get("firstname"));
-                    userSession.setAttribute("lastname", jObj.get("lastname"));
-                    userSession.setAttribute("phone", jObj.get("phone"));
-                    userSession.setAttribute("emailaddress", jObj.get("email"));
-                    userSession.setAttribute("userid", jObj.get("userid"));
-                     */
-                    userSession.setAttribute("account", account);
-
                     // if redirecting from authorizationfilter
                     if (SessionBean.getRequestURI() == null) {
                         log.log(Level.INFO, "targetURI{0}", targetURI);
                         return targetURI;
                     } else {
                         log.log(Level.INFO, "sessionbeanuri{0}", SessionBean.getRequestURI());
-                        return SessionBean.getRequestURI() + "?faces-redirect=true";
+                        return SessionBean.getRequestURI();
                         // return SessionBean.getRequestURI().replace("OLLE/", "") + "?faces-redirect=true";
                     }
-                case "1":
+                case 1:
                     // Inactive account
                     FacesContext.getCurrentInstance()
                             .addMessage(
@@ -295,7 +332,7 @@ public class AccountController implements Serializable {
                                             "Inactive account",
                                             "You have not activated the account. Click here to activate the account."));
                     return "login";
-                case "3":
+                case 3:
                     // Locked account
                     FacesContext.getCurrentInstance()
                             .addMessage(
@@ -304,7 +341,7 @@ public class AccountController implements Serializable {
                                             "Locked account",
                                             "Your account is currently locked. Click here to activate the account."));
                     return "login";
-                case "4":
+                case 4:
                     // Expired account
                     FacesContext.getCurrentInstance()
                             .addMessage(
@@ -313,7 +350,7 @@ public class AccountController implements Serializable {
                                             "Expired account",
                                             "Your account has expired. Click here to activate the account."));
                     return "login";
-                case "5":
+                case 5:
                     // Deleted account
                     FacesContext.getCurrentInstance()
                             .addMessage(
@@ -354,18 +391,17 @@ public class AccountController implements Serializable {
 				return targetURI;
 			else 
 				return SessionBean.getRequestURI();*/
-        } catch (JSONException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             return "login";
         }
     }
 
-    /*
     public String forgotCredentials() {
         try {
             String email = account.getEmail();
 
-            ConsumeJSON cjson = new ConsumeJSON(spf.getEmailAddressURL(), email, false);
+            ConsumeJSON cjson = new ConsumeJSON(VALIDATEEMAIL_URL, email, false);
 
             String strJSONValue = cjson.getResult();
             JSONObject jObj = new JSONObject(strJSONValue);
@@ -402,16 +438,16 @@ public class AccountController implements Serializable {
                                         "Account not found:",
                                         "There is no account registered with the email address provided."));
             }
-        } catch (IOException e) {
-            log.log(Level.SEVERE, "Exception Logged: ", e.getMessage());
         } catch (JSONException ex) {
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return forgot;
     }
-     */
-    public String manageUserAccount() {
-        String targetURI = "manageaccount.xhtml";
+
+    public void manageUserAccount() {
+        // String targetURI = "manageaccount.xhtml";
         try {
             Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
 
@@ -450,14 +486,15 @@ public class AccountController implements Serializable {
             conn.disconnect();
 
             account = new Account();
-            return targetURI;
+            FacesContext context = FacesContext.getCurrentInstance();
+
+            context.addMessage(null, new FacesMessage("Successful", "Success: " + "You have successfully updated your account"));
 
         } catch (IOException e) {
             log.log(Level.SEVERE, "Exception Logged: ", e.getMessage());
-        } 
+        }
 
-        return targetURI;
-
+        // return targetURI;
     }
 
     // logout event, invalidate session

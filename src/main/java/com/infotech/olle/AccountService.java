@@ -8,6 +8,7 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import com.infotech.olle.Account;
+import com.infotech.olle.util.UserSession;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -30,6 +31,7 @@ public class AccountService implements Serializable {
     public String email;
     public String phone;
     public String username;
+    public String forgot;
 
     EntityManagerFactory emf;
     EntityManager em;
@@ -44,15 +46,12 @@ public class AccountService implements Serializable {
     // create Account
     public String createUserAccount(Account account) {
         try {
-
             em.persist(account);
-
             em.getTransaction().commit();
             r = "1";
             return r;
         } catch (Exception e) {
-            log.log(Level.SEVERE, "createAccount:{0}",
-                    e.getMessage());
+            log.log(Level.SEVERE, "createAccount:{0}", e.getMessage());
             return r;
         } finally {
             em.close();
@@ -169,7 +168,7 @@ public class AccountService implements Serializable {
             Query query = em.createNamedQuery("Account.findByActivationKey", Account.class).setParameter("activationKey", activationkey);
             List<Account> accountList = query.getResultList();
             for (Account account : accountList) {
-                account.setStatus("2");
+                account.setStatus(2);
                 em.persist(account);
                 em.getTransaction().commit();
             }
@@ -184,27 +183,27 @@ public class AccountService implements Serializable {
     }
 
     // login
-    public String authenticateUser(String username, String password, String ipaddress) {
+    public UserSession authenticateUser(UserCredentials authenticate) throws Exception{
+        UserSession uSession = new UserSession();
         try {
+            String username = authenticate.getUsername();
+            String password = authenticate.getPassword();
+            
             Query query = em.createNamedQuery("Account.findByUsernamePassword", Account.class).setParameter("password", password).setParameter("username", username);
             List<Account> accountList = query.getResultList();
-            for (Account account : accountList) {
-                r = account.getStatus() + "";    
-                userid = account.getUserid() + "";
-                firstname = account.getFirstName();
-                lastname = account.getLastName();
-                email = account.getEmail();
-                phone = account.getPhone();
-                this.username = account.getUsername();
-            }
-            return r;
+            Account account = accountList.get(0);
+            uSession.setUserId(account.getUserid());
+            uSession.setAccount(account);
+            
         } catch (Exception e) {
-            log.log(Level.SEVERE, "authenticateUser:{0}", e.getMessage());
-            return r;
+            log.log(Level.SEVERE, "authenticateUser:{0} - e.getMessage()",e );
+            throw e;
+
         } finally {
             em.close();
             emf.close();
         }
+        return uSession;
     }
 
     // get Account by userid

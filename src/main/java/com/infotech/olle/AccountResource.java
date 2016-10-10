@@ -1,5 +1,6 @@
 package com.infotech.olle;
 
+import com.infotech.olle.util.UserSession;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -78,17 +79,17 @@ public class AccountResource extends Application {
     }
 
     // authenticateUser user - Needs to be a POST request to create user session after login - No userid/password in the URL
-    @GET
-    @Path("/authenticateuser/{username}/{password}/{IPAddress}")
+    @POST
+    @Path("/login/")
     @Produces(MediaType.APPLICATION_JSON)
-    public AccountService authenticateUser(
-            @PathParam("username") String username,
-            @PathParam("password") String password,
-            @PathParam("IPAddress") String ipaddress) {
-        AccountService serviceAccount = new AccountService();
-        serviceAccount.authenticateUser(username, password, ipaddress);
-        return serviceAccount;
-
+    public Response login(UserCredentials credentials) {
+        AccountService accountService = new AccountService();
+        try{
+        UserSession uSession = accountService.authenticateUser(credentials);   
+        return Response.status(201).entity(uSession).build();
+        }catch(Exception e){
+            return Response.status(500).entity(false).build();
+        }
     }
 
     @GET
@@ -136,7 +137,7 @@ public class AccountResource extends Application {
     @Path("/RemoveAccount/")
     @Produces(MediaType.APPLICATION_JSON)
     public boolean deleteAccount(Account account) {
-        account.setStatus("5");
+        account.setStatus(5);
         AccountService accountService = new AccountService();
         return accountService.manageUserAccount(account);
     }

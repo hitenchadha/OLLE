@@ -48,7 +48,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Account.findByPassword", query = "SELECT a FROM Account a WHERE a.password = :password"),
     @NamedQuery(name = "Account.findByStatus", query = "SELECT a FROM Account a WHERE a.status = :status"),
     @NamedQuery(name = "Account.findByActivationKey", query = "SELECT a FROM Account a WHERE a.activationKey = :activationKey"),
-    @NamedQuery(name = "Account.findByCreateDate", query = "SELECT a FROM Account a WHERE a.createDate = :createDate"),
+    // @NamedQuery(name = "Account.findByCreateDate", query = "SELECT a FROM Account a WHERE a.createDate = :createDate"),
   
 })
 
@@ -96,17 +96,17 @@ public class Account implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "\"STATUS\"")
-    private String status;
+    private int status;
     @Basic(optional = false)
-    @NotNull
+    // @NotNull
     @Size(min = 1, max = 16)
     @Column(name = "\"ACTIVATION_KEY\"")
     private String activationKey;
-    @Basic(optional = false)
+    // @Basic(optional = false)
     //@NotNull
-    @Column(name = "\"CREATE_DATE\"")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createDate;
+    // @Column(name = "\"CREATE_DATE\"")
+    // @Temporal(TemporalType.TIMESTAMP)
+    // private Date createDate;
 
     public Account() {
     }
@@ -115,7 +115,7 @@ public class Account implements Serializable {
         this.userid = userid;
     }
 
-    public Account(Integer userid, String username, String firstName, String lastName, String phone, String email, String password, String status, String activationKey, Date createDate) {
+    public Account(Integer userid, String username, String firstName, String lastName, String phone, String email, String password, int status, String activationKey, Date createDate) {
         this.userid = userid;
         this.username = username;
         this.firstName = firstName;
@@ -125,7 +125,7 @@ public class Account implements Serializable {
         this.password = password;
         this.status = status;
         this.activationKey = activationKey;
-        this.createDate = createDate;
+        // this.createDate = createDate;
     }
 
     public Integer getUserid() {
@@ -184,7 +184,7 @@ public class Account implements Serializable {
         this.password = password;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
@@ -199,7 +199,7 @@ public class Account implements Serializable {
     public void setActivationKey(String activationKey) {
         this.activationKey = activationKey;
     }
-
+/*
     public Date getCreateDate() {
         return createDate;
     }
@@ -207,7 +207,7 @@ public class Account implements Serializable {
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
-
+*/
     @Override
     public int hashCode() {
         int hash = 0;
@@ -233,7 +233,7 @@ public class Account implements Serializable {
         return "com.infotech.flup.Account[ userid=" + userid + " ]";
     }
 
-    void setStatus(String status) {
+    void setStatus(int status) {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         this.status = status;
     }

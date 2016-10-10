@@ -37,7 +37,8 @@ public class AuthorizationFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException {
         // Get the username from session
 
-        Account account = (Account) ((HttpServletRequest) request).getSession().getAttribute("account");
+        Account account = (Account) ((HttpServletRequest) request).getSession().getAttribute("accountbean");
+        
         // String username = (String) ((HttpServletRequest)request).getSession().getAttribute("username");
         try {
             HttpServletRequest req = (HttpServletRequest)request;
@@ -50,6 +51,7 @@ public class AuthorizationFilter implements Filter {
 
             } else {
             log.log(Level.INFO, "Requested URL: {0}", requestURL);
+            log.log(Level.INFO, " User First Name="+account.getFirstName()+" & last name="+account.getLastName());
             chain.doFilter(request, response);
             }
         } catch (IOException  e) {
