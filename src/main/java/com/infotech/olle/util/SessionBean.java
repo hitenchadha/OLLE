@@ -8,17 +8,22 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import javax.servlet.http.HttpServletResponse;
+
 @ManagedBean(name = "sessionbean")
 @SessionScoped
 public class SessionBean implements Serializable {
-
+private static final Logger log = Logger.getLogger(SessionBean.class.getName());
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public static HttpSession getSession() {
 		return (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(false);
+				.getExternalContext().getSession(true);
+                
 	}
 
 	public static HttpServletRequest getRequest() {
@@ -107,19 +112,19 @@ public class SessionBean implements Serializable {
 	// RequestURI
 	public static String getRequestURI() {
 		HttpSession session = getSession();
-		if (session != null)
-			return (String) session.getAttribute("requestURI");
-		else
-			return null;
+		if (session != null) {
+                    return (String) session.getAttribute("requestURI");
+                } else {
+                    return null;
+                }
 
 	}
-        
-
-	/*
+	
 	public static void setRequestURI(String requestURI) {
+            log.info("setRequest: " + requestURI);
 		HttpSession session = getSession();
-		if (session != null)
-			session.setAttribute("requestURI", requestURI);
+                log.info("setRequest1: " + session.getId());
+                session.setAttribute("requestURI", requestURI);
 	}
-	*/
+	
 }

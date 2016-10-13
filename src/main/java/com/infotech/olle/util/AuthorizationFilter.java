@@ -21,41 +21,34 @@ import javax.servlet.http.HttpSession;
 public class AuthorizationFilter implements Filter {
 
     private static final Logger log = Logger.getLogger(AuthorizationFilter.class.getName());
-    // @ManagedProperty(value = "#{accountbean}")
+    /*
+    @ManagedProperty(value = "#{accountbean}")
 
-    // private Account account;
-
-    /**
-     * Checks if user is logged in. If not it redirects to the login.xhtml page.
-     *
-     * @param request
-     * @param response
-     * @param chain
-     * @throws javax.servlet.ServletException
-     */
+    private Account account;
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+    */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException {
-        // Get the username from session
 
-        Account account = (Account) ((HttpServletRequest) request).getSession().getAttribute("accountbean");
-        
         // String username = (String) ((HttpServletRequest)request).getSession().getAttribute("username");
         try {
             HttpServletRequest req = (HttpServletRequest)request;
             HttpServletResponse resp = (HttpServletResponse) response;
-            // HttpSession session = req.getSession(true);
-            String requestURL = req.getRequestURI();
-            if (account == null) {
+            HttpSession session = req.getSession(true);
+            String requestURL = req.getRequestURI().replace("/OLLE","");
 
-                resp.sendRedirect(((HttpServletRequest) request).getContextPath() + "/account/login.xhtml");
-
+            String loginURL = req.getContextPath() + "/account/login.xhtml";
+            session.setAttribute("requestURI", requestURL);
+            boolean loggedIn = (session.getAttribute("accountbean") != null);       
+            // Account account = (Account) req.getSession().getAttribute("accountbean");
+            if (loggedIn) {
+                chain.doFilter(request, response);
             } else {
-            log.log(Level.INFO, "Requested URL: {0}", requestURL);
-            log.log(Level.INFO, " User First Name="+account.getFirstName()+" & last name="+account.getLastName());
-            chain.doFilter(request, response);
+                resp.sendRedirect(loginURL);
             }
         } catch (IOException  e) {
-            // TODO Auto-generated catch block
             log.severe(e.getMessage());
         }
     }
