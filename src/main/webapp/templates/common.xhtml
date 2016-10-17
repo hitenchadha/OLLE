@@ -22,35 +22,47 @@
         <h:outputStylesheet name="css/animate.css" library="volt-layout" />
         <h:outputStylesheet name="css/volt-font.css" library="volt-layout" />
         <h:outputStylesheet name="css/font-awesome.css" library="volt-layout" />
-        <h:outputStylesheet name="css/volt-layout.css" library="volt-layout" />
+        <h:outputStylesheet name="css/volt-layout.css" library="volt-layout" /> 
 
         <p:layout fullPage="true" style="margin-top: 0px">
             <!-- Added collapsible="true" gutter="0" to minimize spacing between layouts -->
             <p:layoutUnit position="north" size="70" collapsible="true" gutter="0" style="margin-top: 0px;margin-bottom: 0px">
                 <ui:insert name="north">
-                            <p:toolbar class="BlueBody White">
-                                <f:facet name="left" >
-                                    <a href="/OLLE/"><i class="icon-lightbulb Fs40" />Easing my data!</a>
-                                </f:facet>
-                                <f:facet name="right" >
-                                        <a href="/OLLE/account/login.xhtml"><i class="fa fa-key Fs12" /> Login</a> |
-                                        <a href="/OLLE/account/signup.xhtml"><i class="fa fa-user Fs12" /> Signup</a> 
+                    <p:toolbar class="BlueBody White">
+                        <f:facet name="left"> 
+                            <a href="/OLLE/"><i class="icon-lightbulb Fs40" />Easing my data!</a>
+                        </f:facet>
+                        <f:facet  name="right">
+                            <h:form rendered="#{accountbean.userid != null}">
+                                <p:commandLink id="dynaButton" class="White" value="#{accountbean.firstName} #{accountbean.lastName}" />
 
-                                </f:facet>
-                            </p:toolbar>
+                                <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+
+                                    <p:menuitem  value="Manage Account" outcome="/secured/manageaccount" icon="icon-vcard Fs20"/>
+                                    <p:menuitem  value="Logout" action="#{accountcontroller.logout}" icon="ui-icon-arrowrefresh-1-w"/>
+
+                                </p:menu>
+                            </h:form>
+                            <h:form rendered="#{accountbean.userid == null}">
+                                <a href="/OLLE/account/login.xhtml"><i class="fa fa-key Fs12" /> Login</a> |
+                                <a href="/OLLE/account/signup.xhtml"><i class="fa fa-user Fs12" /> Signup</a> 
+                            </h:form>
+
+                        </f:facet>
+                    </p:toolbar>
                 </ui:insert>
             </p:layoutUnit>
 
             <p:layoutUnit position="south" size="50" collapsible="true" gutter="0">
                 <ui:insert name="south">
                     <p:layout>
-                        <p:layoutUnit position="west" size="215" style="border:0;" class="Fs13">
+                        <p:layoutUnit position="west" size="215" class="Fs13" style="border:0;" >
                             <h:outputText value="Privacy | Terms | About us" />
                         </p:layoutUnit>
-                        <p:layoutUnit position="east" size="215" style="border:0;" class="TexAlCenter">
+                        <p:layoutUnit position="east" size="215" class="TexAlCenter" style="border:0;" >
                             <i class="fa fa-apple Fs20" /> | <i class="fa fa-android Fs20" />
                         </p:layoutUnit>
-                        <p:layoutUnit position="center" style="border:0;">
+                        <p:layoutUnit position="center" style="border:0;" >
                         </p:layoutUnit>
                     </p:layout>
                 </ui:insert>
@@ -58,7 +70,35 @@
 
             <p:layoutUnit position="west" size="215" style="border-top:0; border-left: 0; border-right: 0" collapsible="true" gutter="0">
                 <ui:insert name="west">
-                    
+                    <h:panelGrid columns="1" id="navigationgrid" rendered="#{accountbean.userid != null}">
+                        <h:form id="leftmenu">
+                            <p:menu>
+                                <p:submenu label="Forms" style="margin-top: 0">
+                                    <p:menuitem value="Search/Browse forms" icon="fa fa-search"
+                                                url="/secured/forms/searchform.xhtml" />
+                                    <p:menuitem value="In Progress" icon="fa fa-th-large"
+                                                url="/secured/forms/inprogress.xhtml" />
+                                    <p:menuitem value="Complete" icon="fa fa-stop"
+                                                url="/secured/forms/completed.xhtml" />
+                                </p:submenu>
+                            </p:menu>
+                            <br />
+                            <p:menu>
+                                <p:submenu label="My Profile" style="margin-top: 0">
+                                    <p:menuitem value="Contact" icon="fa fa-list-alt" 
+                                                action="#{profilecontroller.preLoadContact}" />
+                                    <p:menuitem value="Identity" icon="fa fa-tag"
+                                                action="#{profilecontroller.preLoadIdentity}" />
+                                    <p:menuitem value="Spouse" icon="fa fa-heart"
+                                                action="#{profilecontroller.preLoadSpouse}" />
+                                    <p:menuitem value="Child(ren)" icon="fa fa-child"
+                                                url="/secured/child.xhtml" />
+                                    <p:menuitem value="Emergency contact" icon="fa fa-ambulance"
+                                                url="/secured/emergency.xhtml" />
+                                </p:submenu>
+                            </p:menu>
+                        </h:form>
+                    </h:panelGrid>
                 </ui:insert>
             </p:layoutUnit>
 

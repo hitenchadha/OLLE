@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
 
@@ -33,18 +33,8 @@
                     <p:inputText id="firstname"	value="#{emegencybean.firstname}" size="18" />&#160;
                     <p:watermark for="firstname" value="Firstname" />
 
-                    <p:inputText id="middlename" value="#{emegencybean.middlename}" size="10" />
-                    <p:watermark for="middlename" value="Middlename" />&#160;
-
                     <p:inputText id="lastname" value="#{emegencybean.lastname}" size="18" />
                     <p:watermark for="lastname" value="Lastname" />
-                </p:column>
-
-                <p:column>
-                    Gender:&#160;
-                </p:column>
-                <p:column>
-                    <p:inputText id="gender" value="#{emegencybean.gender}" size="12" />
                 </p:column>
 
             </h:panelGrid>
@@ -81,32 +71,7 @@
                 </p:column>
 
             </h:panelGrid>
-            <div class="Separator" />
-            <h3 style="margin-top:0;margin-bottom:10px;"><i class="fa fa-envelope Fs17" /> Email</h3>
-            <h:panelGrid columns="2" style=" margin-left: 10px">
-                <p:column>
-                    Personal Email:&#160;
-                </p:column>
-                <p:column>
-                    <p:inputText id="homeemail" value="#{emergencybean.homeemail}"
-                                 validatorMessage="Invalid spouses personal email format"
-                                 size="50" style="vertical-align:middle;float:right;align:right;" >
-                        <f:validateRegex
-                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                    </p:inputText>
-                </p:column>
-
-                <p:column>
-                    Work Email:&#160;
-                </p:column>
-                <p:column>
-                    <p:inputText id="workemail" value="#{emergencybean.workemail}"
-                                 validatorMessage="Invalid spouses work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
-                        <f:validateRegex
-                            pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                    </p:inputText>
-                </p:column>
-            </h:panelGrid>
+            
             <div class="Separator" />
             <h3 style="margin-top:0;margin-bottom:10px;"><i class="fa fa-building Fs17" /> Address</h3>
 

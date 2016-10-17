@@ -302,7 +302,10 @@ public class AccountController implements Serializable {
                 case 2:
                     // Active Account
                     // if redirecting from authorizationfilter
-
+                    //Contact contact = new Contact();
+                    //contact.setUserid(account.getUserid());
+                    //contact.setMobilePhone(account.getPhone());
+                    //FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("contactbean", contact);
                     if (SessionBean.getRequestURI() == null) {
                         log.log(Level.INFO, "targetURI{0}", targetURI);
                         return targetURI;
@@ -319,6 +322,7 @@ public class AccountController implements Serializable {
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                                             "Inactive account",
                                             "You have not activated the account. Click here to activate the account."));
+                    return "login.xhtml";
                 case 3:
                     // Locked account
                     FacesContext.getCurrentInstance()
@@ -327,6 +331,7 @@ public class AccountController implements Serializable {
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                                             "Locked account",
                                             "Your account is currently locked. Click here to activate the account."));
+                    return "login.xhtml";
                 case 4:
                     // Expired account
                     FacesContext.getCurrentInstance()
@@ -335,6 +340,7 @@ public class AccountController implements Serializable {
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                                             "Expired account",
                                             "Your account has expired. Click here to activate the account."));
+                    return "login.xhtml";
                 case 5:
                     // Deleted account
                     FacesContext.getCurrentInstance()
@@ -343,13 +349,15 @@ public class AccountController implements Serializable {
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
                                             "Deleted account",
                                             "Your account has been deleted. Please contact the administrator."));
+                    return "login.xhtml";
                 default:
-                    // Expired; Deleted
+                    // Expired; Invalid
                     FacesContext.getCurrentInstance().addMessage(
                             null,
                             new FacesMessage(FacesMessage.SEVERITY_WARN,
                                     "Invalid Username/Password: ",
                                     "Please login with correct credentials."));
+                    return "login.xhtml";
             }
         } catch (IOException e) {
             FacesContext.getCurrentInstance().addMessage(

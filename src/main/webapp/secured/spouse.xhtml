@@ -1,7 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <ui:define name="center">
@@ -24,17 +24,17 @@
             <h:panelGrid columns="4" style=" margin-left: 10px">
                 <p:column>Spouse Name: </p:column>
                 <p:column colspan="3">
-                    <p:inputText id="firstname" value="#{spousebean.firstname}"
+                    <p:inputText id="firstName" value="#{spousebean.firstName}"
                                  size="18" >
-                        <p:watermark for="firstname" value="Firstname" />
+                        <p:watermark for="firstName" value="Firstname" />
                     </p:inputText>&#160;
-                    <p:inputText id="middlename" value="#{spousebean.middlename}"
+                    <p:inputText id="middleName" value="#{spousebean.middleName}"
                                  size="10" >
-                        <p:watermark for="middlename" value="Middlename" />
+                        <p:watermark for="middleName" value="Middlename" />
                     </p:inputText>&#160;
-                    <p:inputText id="lastname" value="#{spousebean.lastname}"
+                    <p:inputText id="lastName" value="#{spousebean.lastName}"
                                  size="18" >
-                        <p:watermark for="lastname" value="Lastname" />
+                        <p:watermark for="lastName" value="Lastname" />
                     </p:inputText>
                 </p:column>
             </h:panelGrid>
@@ -51,9 +51,9 @@
 
                 <p:column>Birth Date: </p:column>
                 <p:column>
-                    <p:calendar id="birthdate" value="#{calendarView.date9}"
+                    <p:calendar id="birthdayDate" value="#{calendarView.date9}"
                                 pattern="MM-dd-yyyy" mask="true" size="15" style="vertical-align:middle;float:right;align:right;" />
-                    <p:watermark for="birthdate" value="Date" />
+                    <p:watermark for="birthdayDate" value="Date" />
                 </p:column>
             </h:panelGrid>
             <div class="Separator" />
@@ -63,28 +63,28 @@
                     Home Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="homephone" value="#{spousebean.homephone}"
+                    <p:inputMask id="homePhone" value="#{spousebean.homePhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Work Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="workphone" value="#{spousebean.workphone}"
+                    <p:inputMask id="workPhone" value="#{spousebean.workPhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Mobile Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="mobilephone" value="#{spousebean.mobilephone}"
+                    <p:inputMask id="mobilePhone" value="#{spousebean.mobilePhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Other Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="otherphone" value="#{spousebean.otherphone}"
+                    <p:inputMask id="otherPhone" value="#{spousebean.otherPhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
 
@@ -96,7 +96,7 @@
                     Personal Email:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputText id="homeemail" value="#{spousebean.homeemail}"
+                    <p:inputText id="homeEmail" value="#{spousebean.homeEmail}"
                                  validatorMessage="Invalid spouses personal email format"
                                  size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
@@ -108,7 +108,7 @@
                     Work Email:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputText id="workemail" value="#{spousebean.workemail}"
+                    <p:inputText id="workEmail" value="#{spousebean.workEmail}"
                                  validatorMessage="Invalid spouses work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -121,33 +121,33 @@
                 <p:tab title="Home">
                     <h:panelGrid columns="1">    
                         <p:column>
-                            <p:inputText id="homeaddressline1"
-                                         value="#{spousebean.homeaddressline1}" size="35" />
-                            <p:watermark for="homeaddressline1" value="Address Line 1" />
+                            <p:inputText id="homeAddressLine1"
+                                         value="#{spousebean.homeAddressLine1}" size="35" />
+                            <p:watermark for="homeAddressLine1" value="Address Line 1" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="homeaddressline2"
-                                         value="#{spousebean.homeaddressline2}" size="35" />
-                            <p:watermark for="homeaddressline2" value="Address Line 2" />
+                            <p:inputText id="homeAddressLine2"
+                                         value="#{spousebean.homeAddressLine2}" size="35" />
+                            <p:watermark for="homeAddressLine2" value="Address Line 2" />
                         </p:column>
                         <p:column>
                             
-                            <p:inputText id="homecity" value="#{spousebean.homecity}" size="10" />&#160;
-                            <p:watermark for="homecity" value="City" />
-                            <p:selectOneMenu id="homestate" value="#{selectOneViewMenu.state}"
+                            <p:inputText id="homeAddressCity" value="#{spousebean.homeAddressCity}" size="10" />&#160;
+                            <p:watermark for="homeAddressCity" value="City" />
+                            <p:selectOneMenu id="homeAddressState" value="#{selectOneViewMenu.state}"
                                              style="vertical-align:middle;" >
                                 <f:selectItem itemLabel="Select State" itemValue="" />
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
 
-                            <p:inputText id="homezip" value="#{spousebean.homezip}"
+                            <p:inputText id="homeAddressZip" value="#{spousebean.homeAddressZip}"
                                          size="4" />
-                            <p:watermark for="homezip" value="Zip" />
+                            <p:watermark for="homeAddressZip" value="Zip" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="homecountry" value="#{spousebean.homecountry}"
+                            <p:inputText id="homeAddressCountry" value="#{spousebean.homeAddressCountry}"
                                          size="12" />
-                            <p:watermark for="homecountry" value="Country" />
+                            <p:watermark for="homeAddressCountry" value="Country" />
                         </p:column>
                     </h:panelGrid>
                 </p:tab>
@@ -155,97 +155,67 @@
                 <p:tab title="Work">
                     <h:panelGrid columns="1">    
                         <p:column>
-                            <p:inputText id="workaddressline1"
-                                         value="#{spousebean.workaddressline1}" size="35" />
-                            <p:watermark for="workaddressline1" value="Address Line 1" />
-                        </p:column><p:column>
-                            <p:inputText id="workaddressline2"
-                                         value="#{spousebean.workaddressline2}" size="35" />
-                            <p:watermark for="workaddressline2" value="Address Line 2" />
+                            <p:inputText id="workAddressLine1"
+                                         value="#{spousebean.workAddressLine1}" size="35" />
+                            <p:watermark for="workAddressLine1" value="Address Line 1" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="workAddressLine2"
+                                         value="#{spousebean.workAddressLine2}" size="35" />
+                            <p:watermark for="workAddressLine2" value="Address Line 2" />
                         </p:column>
                         <p:column>
                             
-                            <p:inputText id="workcity" value="#{spousebean.workcity}" size="10" />&#160;
-                            <p:watermark for="workcity" value="City" />
-                            <p:selectOneMenu id="workstate" value="#{selectOneViewMenu.state}"
+                            <p:inputText id="workAddressCity" value="#{spousebean.workAddressCity}" size="10" />&#160;
+                            <p:watermark for="workAddressCity" value="City" />
+                            <p:selectOneMenu id="workAddressState" value="#{selectOneViewMenu.state}"
                                              style="vertical-align:middle;" >
                                 <f:selectItem itemLabel="Select State" itemValue="" />
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
 
-                            <p:inputText id="workzip" value="#{spousebean.workzip}"
+                            <p:inputText id="workAddressZip" value="#{spousebean.workAddressZip}"
                                          size="4" />
-                            <p:watermark for="workzip" value="Zip" />
-                        </p:column><p:column>
-                            <p:inputText id="workcountry" value="#{spousebean.workcountry}"
+                            <p:watermark for="workAddressZip" value="Zip" />
+                        </p:column>
+                        <p:column>
+                            <p:inputText id="workAddressCountry" value="#{spousebean.workAddressCountry}"
                                          size="12" />
-                            <p:watermark for="workcountry" value="Country" />
+                            <p:watermark for="workAddressCountry" value="Country" />
                         </p:column>
                     </h:panelGrid>
                 </p:tab>
 
                 <p:tab title="Mailing">
-                    <h:panelGrid columns="1"> 
+                    <h:panelGrid columns="1">    
                         <p:column>
-                            <p:inputText id="mailingaddressline1"
-                                         value="#{spousebean.mailingaddressline1}" size="35" />
-                            <p:watermark for="mailingaddressline1" value="Address Line 1" />
+                            <p:inputText id="mailingAddressLine1"
+                                         value="#{spousebean.mailingAddressLine1}" size="35" />
+                            <p:watermark for="mailingAddressLine1" value="Address Line 1" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="mailingaddressline2"
-                                         value="#{spousebean.mailingaddressline2}" size="35" />
-                            <p:watermark for="mailingaddressline2" value="Address Line 2" />
+                            <p:inputText id="mailingAddressLine2"
+                                         value="#{spousebean.mailingAddressLine2}" size="35" />
+                            <p:watermark for="mailingAddressLine2" value="Address Line 2" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="mailingcity" value="#{spousebean.mailingcity}"
-                                         size="10" />&#160;
-                            <p:watermark for="mailingcity" value="City" />
-                            <p:selectOneMenu id="mailingstate"
-                                             value="#{selectOneViewMenu.state}" style="vertical-align:middle;" >
-                                <f:selectItem itemLabel="Select State" itemValue="" />
-                                <f:selectItems value="#{selectOneViewMenu.states}" />
-                            </p:selectOneMenu>&#160;
-                            <p:inputText id="mailingzip" value="#{spousebean.mailingzip}"
-                                         size="4" />
-                            <p:watermark for="mailingzip" value="Zip" />
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="mailingcountry"
-                                         value="#{spousebean.mailingcountry}" size="12" />
-                            <p:watermark for="mailingcountry" value="Country" />
-                        </p:column>
-                    </h:panelGrid>
-                </p:tab>
-
-                <p:tab title="Billing">
-                    <h:panelGrid columns="1"> 
-                        <p:column>
-                            <p:inputText id="billingaddressline1"
-                                         value="#{spousebean.billingaddressline1}" size="35" />
-                            <p:watermark for="billingaddressline1" value="Address Line 1" />
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="billingaddressline2"
-                                         value="#{spousebean.billingaddressline2}" size="35" />
-                            <p:watermark for="billingaddressline2" value="Address Line 2" />
-                        </p:column>
-                        <p:column>
-                            <p:inputText id="billingcity" value="#{spousebean.billingcity}"
-                                         size="10" />&#160;
-                            <p:watermark for="billingcity" value="City" />
-                            <p:selectOneMenu id="bstate" value="#{selectOneViewMenu.state}"
+                            
+                            <p:inputText id="mailingAddressCity" value="#{spousebean.mailingAddressCity}" size="10" />&#160;
+                            <p:watermark for="mailingAddressCity" value="City" />
+                            <p:selectOneMenu id="mailingAddressState" value="#{selectOneViewMenu.state}"
                                              style="vertical-align:middle;" >
                                 <f:selectItem itemLabel="Select State" itemValue="" />
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
-                            <p:inputText id="billingzip" value="#{spousebean.billingzip}"
+
+                            <p:inputText id="mailingAddressZip" value="#{spousebean.mailingAddressZip}"
                                          size="4" />
-                            <p:watermark for="billingzip" value="Zip" />
+                            <p:watermark for="mailingAddressZip" value="Zip" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="billingcountry"
-                                         value="#{spousebean.billingcountry}" size="12" />
-                            <p:watermark for="billingcountry" value="Country" />
+                            <p:inputText id="mailingAddressCountry" value="#{spousebean.mailingAddressCountry}"
+                                         size="12" />
+                            <p:watermark for="mailingAddressCountry" value="Country" />
                         </p:column>
                     </h:panelGrid>
                 </p:tab>

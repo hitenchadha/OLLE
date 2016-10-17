@@ -1,10 +1,10 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui" template="/templates/common_secure.xhtml"
+                xmlns:p="http://primefaces.org/ui" template="/templates/common.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-
+    
     <ui:define name="center">
 
         <h:form>
@@ -27,28 +27,28 @@
                     Home Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="homephone" value="#{contactbean.homephone}"
+                    <p:inputMask id="homephone" value="#{contactbean.homePhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Work Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="workphone" value="#{contactbean.workphone}"
+                    <p:inputMask id="workphone" value="#{contactbean.workPhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Mobile Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="mobilephone" value="#{contactbean.mobilephone}"
+                    <p:inputMask id="mobilephone" value="#{contactbean.mobilePhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Other Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="otherphone" value="#{contactbean.otherphone}"
+                    <p:inputMask id="otherphone" value="#{contactbean.otherPhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
 
@@ -60,7 +60,7 @@
                     Personal Email:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputText id="homeemail" value="#{contactbean.homeemail}"
+                    <p:inputText id="homeemail" value="#{contactbean.homeEmail}"
                                  validatorMessage="Invalid spouses personal email format"
                                  size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
@@ -72,7 +72,7 @@
                     Work Email:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputText id="workemail" value="#{contactbean.workemail}"
+                    <p:inputText id="workemail" value="#{contactbean.workEmail}"
                                  validatorMessage="Invalid spouses work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -86,17 +86,17 @@
                     <h:panelGrid columns="1">    
                         <p:column>
                             <p:inputText id="homeaddressline1"
-                                         value="#{contactbean.homeaddressline1}" size="35" />
+                                         value="#{contactbean.homeAddressLine1}" size="35" />
                             <p:watermark for="homeaddressline1" value="Address Line 1" />
                         </p:column>
                         <p:column>
                             <p:inputText id="homeaddressline2"
-                                         value="#{contactbean.homeaddressline2}" size="35" />
+                                         value="#{contactbean.homeAddressLine2}" size="35" />
                             <p:watermark for="homeaddressline2" value="Address Line 2" />
                         </p:column>
                         <p:column>
                             
-                            <p:inputText id="homecity" value="#{contactbean.homecity}" size="10" />&#160;
+                            <p:inputText id="homecity" value="#{contactbean.homeAddressCity}" size="10" />&#160;
                             <p:watermark for="homecity" value="City" />
                             <p:selectOneMenu id="homestate" value="#{selectOneViewMenu.state}"
                                              style="vertical-align:middle;" >
@@ -104,12 +104,12 @@
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
 
-                            <p:inputText id="homezip" value="#{contactbean.homezip}"
+                            <p:inputText id="homezip" value="#{contactbean.homeAddressZip}"
                                          size="4" />
                             <p:watermark for="homezip" value="Zip" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="homecountry" value="#{contactbean.homecountry}"
+                            <p:inputText id="homecountry" value="#{contactbean.homeAddressCountry}"
                                          size="12" />
                             <p:watermark for="homecountry" value="Country" />
                         </p:column>
@@ -120,16 +120,16 @@
                     <h:panelGrid columns="1">    
                         <p:column>
                             <p:inputText id="workaddressline1"
-                                         value="#{contactbean.workaddressline1}" size="35" />
+                                         value="#{contactbean.workAddressLine1}" size="35" />
                             <p:watermark for="workaddressline1" value="Address Line 1" />
                         </p:column><p:column>
                             <p:inputText id="workaddressline2"
-                                         value="#{contactbean.workaddressline2}" size="35" />
+                                         value="#{contactbean.workAddressLine2}" size="35" />
                             <p:watermark for="workaddressline2" value="Address Line 2" />
                         </p:column>
                         <p:column>
                             
-                            <p:inputText id="workcity" value="#{contactbean.workcity}" size="10" />&#160;
+                            <p:inputText id="workcity" value="#{contactbean.workAddressCity}" size="10" />&#160;
                             <p:watermark for="workcity" value="City" />
                             <p:selectOneMenu id="workstate" value="#{selectOneViewMenu.state}"
                                              style="vertical-align:middle;" >
@@ -137,11 +137,11 @@
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
 
-                            <p:inputText id="workzip" value="#{contactbean.workzip}"
+                            <p:inputText id="workzip" value="#{contactbean.workAddressZip}"
                                          size="4" />
                             <p:watermark for="workzip" value="Zip" />
                         </p:column><p:column>
-                            <p:inputText id="workcountry" value="#{contactbean.workcountry}"
+                            <p:inputText id="workcountry" value="#{contactbean.workAddressCountry}"
                                          size="12" />
                             <p:watermark for="workcountry" value="Country" />
                         </p:column>
@@ -152,16 +152,16 @@
                     <h:panelGrid columns="1"> 
                         <p:column>
                             <p:inputText id="mailingaddressline1"
-                                         value="#{contactbean.mailingaddressline1}" size="35" />
+                                         value="#{contactbean.mailingAddressLine1}" size="35" />
                             <p:watermark for="mailingaddressline1" value="Address Line 1" />
                         </p:column>
                         <p:column>
                             <p:inputText id="mailingaddressline2"
-                                         value="#{contactbean.mailingaddressline2}" size="35" />
+                                         value="#{contactbean.mailingAddressLine2}" size="35" />
                             <p:watermark for="mailingaddressline2" value="Address Line 2" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="mailingcity" value="#{contactbean.mailingcity}"
+                            <p:inputText id="mailingcity" value="#{contactbean.mailingAddressCity}"
                                          size="10" />&#160;
                             <p:watermark for="mailingcity" value="City" />
                             <p:selectOneMenu id="mailingstate"
@@ -169,13 +169,13 @@
                                 <f:selectItem itemLabel="Select State" itemValue="" />
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
-                            <p:inputText id="mailingzip" value="#{contactbean.mailingzip}"
+                            <p:inputText id="mailingzip" value="#{contactbean.mailingAddressZip}"
                                          size="4" />
                             <p:watermark for="mailingzip" value="Zip" />
                         </p:column>
                         <p:column>
                             <p:inputText id="mailingcountry"
-                                         value="#{contactbean.mailingcountry}" size="12" />
+                                         value="#{contactbean.mailingAddressCountry}" size="12" />
                             <p:watermark for="mailingcountry" value="Country" />
                         </p:column>
                     </h:panelGrid>
@@ -185,16 +185,16 @@
                     <h:panelGrid columns="1"> 
                         <p:column>
                             <p:inputText id="billingaddressline1"
-                                         value="#{contactbean.billingaddressline1}" size="35" />
+                                         value="#{contactbean.billingAddressLine1}" size="35" />
                             <p:watermark for="billingaddressline1" value="Address Line 1" />
                         </p:column>
                         <p:column>
                             <p:inputText id="billingaddressline2"
-                                         value="#{contactbean.billingaddressline2}" size="35" />
+                                         value="#{contactbean.billingAddressLine2}" size="35" />
                             <p:watermark for="billingaddressline2" value="Address Line 2" />
                         </p:column>
                         <p:column>
-                            <p:inputText id="billingcity" value="#{contactbean.billingcity}"
+                            <p:inputText id="billingcity" value="#{contactbean.billingAddressCity}"
                                          size="10" />&#160;
                             <p:watermark for="billingcity" value="City" />
                             <p:selectOneMenu id="bstate" value="#{selectOneViewMenu.state}"
@@ -202,13 +202,13 @@
                                 <f:selectItem itemLabel="Select State" itemValue="" />
                                 <f:selectItems value="#{selectOneViewMenu.states}" />
                             </p:selectOneMenu>&#160;
-                            <p:inputText id="billingzip" value="#{contactbean.billingzip}"
+                            <p:inputText id="billingzip" value="#{contactbean.billingAddressZip}"
                                          size="4" />
                             <p:watermark for="billingzip" value="Zip" />
                         </p:column>
                         <p:column>
                             <p:inputText id="billingcountry"
-                                         value="#{contactbean.billingcountry}" size="12" />
+                                         value="#{contactbean.billingAddressCountry}" size="12" />
                             <p:watermark for="billingcountry" value="Country" />
                         </p:column>
                     </h:panelGrid>

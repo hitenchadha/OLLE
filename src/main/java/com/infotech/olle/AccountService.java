@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.infotech.olle.Account;
+import com.infotech.olle.Contact;
 import com.infotech.olle.util.UserSession;
 
 import java.util.List;
@@ -47,6 +47,13 @@ public class AccountService implements Serializable {
     public String createUserAccount(Account account) {
         try {
             em.persist(account);
+            em.getTransaction().commit();
+            
+           Contact contact = new Contact();
+           contact.setUserid(account.getUserid());
+           contact.setMobilePhone(account.getPhone());
+           em.getTransaction().begin();
+           em.persist(contact);
             em.getTransaction().commit();
             r = "1";
             return r;
@@ -190,11 +197,13 @@ public class AccountService implements Serializable {
             String password = authenticate.getPassword();
             
             Query query = em.createNamedQuery("Account.findByUsernamePassword", Account.class).setParameter("password", password).setParameter("username", username);
+            log.info(username + " "  + password);
             List<Account> accountList = query.getResultList();
-            Account account = accountList.get(0);
-            uSession.setUserId(account.getUserid());
-            uSession.setAccount(account);
-            
+            if (!accountList.isEmpty()) {                
+                Account account = accountList.get(0);
+                uSession.setUserId(account.getUserid());
+                uSession.setAccount(account);
+            }
         } catch (Exception e) {
             log.log(Level.SEVERE, "authenticateUser:{0} - e.getMessage()",e );
             throw e;
