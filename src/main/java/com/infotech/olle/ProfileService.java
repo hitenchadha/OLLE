@@ -108,4 +108,42 @@ public class ProfileService implements Serializable {
         }
         return spouse;
     }
+    
+    public Child getChildByUserID(Integer userid) throws Exception {
+        Child child = new Child();
+        try {
+            Query query = em.createNamedQuery("Child.findByUserid", Child.class).setParameter("userid", userid);
+            List<Child> childList = query.getResultList();
+            if (!childList.isEmpty()) {
+                child = childList.get(0);
+            }
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "getChild:{0} - e.getMessage()", e);
+            throw e;
+
+        } finally {
+            em.close();
+            emf.close();
+        }
+        return child;
+    }
+    
+    public Emergency getEmergencyByUserID(Integer userid) throws Exception {
+        Emergency emergency = new Emergency();
+        try {
+            Query query = em.createNamedQuery("Emergency.findByUserid", Emergency.class).setParameter("userid", userid);
+            List<Emergency> emergencyList = query.getResultList();
+            if (!emergencyList.isEmpty()) {
+                emergency = emergencyList.get(0);
+            }
+        } catch (Exception e) {
+            log.log(Level.SEVERE, "getEmergency:{0} - e.getMessage()", e);
+            throw e;
+
+        } finally {
+            em.close();
+            emf.close();
+        }
+        return emergency;
+    }
 }

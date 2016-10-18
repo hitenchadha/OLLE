@@ -6,6 +6,8 @@
     <class>com.infotech.olle.Account</class>
     <class>com.infotech.olle.Identity</class>
     <class>com.infotech.olle.Spouse</class>
+    <class>com.infotech.olle.Emergency</class>
+    <class>com.infotech.olle.Child</class>
     <properties>
       <!--
             <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>

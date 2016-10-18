@@ -64,7 +64,31 @@ public class ProfileResource extends Application {
         }
     }
     
+    @POST
+    @Path("/getchildbyuserid/{userid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getChildByUserID(@PathParam("userid") Integer userid) {
+        try{
+            ProfileService childService = new ProfileService();
+            Child child = childService.getChildByUserID(userid);   
+            return Response.status(201).entity(child).build();
+        }catch(Exception e){
+            return Response.status(500).entity(false).build();
+        }
+    }
     
+    @POST
+    @Path("/getemergencybyuserid/{userid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmergencyByUserID(@PathParam("userid") Integer userid) {
+        try{
+            ProfileService emergencyService = new ProfileService();
+            Emergency emergency = emergencyService.getEmergencyByUserID(userid);   
+            return Response.status(201).entity(emergency).build();
+        }catch(Exception e){
+            return Response.status(500).entity(false).build();
+        }
+    }
     
     // validate email address
     @GET

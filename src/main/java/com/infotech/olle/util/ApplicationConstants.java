@@ -25,8 +25,8 @@ public interface ApplicationConstants {
 
     public static final String MANAGECONTACT_URL = "/rest/profile/ManageContact/";
     public static final String GETSPOUSE_URL = "/rest/profile/getspousebyuserid/";
-    public static final String MANAGECHILDREN_URL = "/rest/profile/Children/";
-    public static final String MANAGEEMERGENCYCONTACT_URL = "/rest/profile/ManageEmergencyContact/";
+    public static final String GETCHILD_URL = "/rest/profile/getchildbyuserid/";
+    public static final String GETEMERGENCY_URL = "/rest/profile/getemergencybyuserid/";
     public static final String GETIDENTITY_URL = "/rest/profile/getidentitybyuserid/";
     public static final String GETCONTACT_URL = "/rest/profile/getcontactbyuserid/";
 
