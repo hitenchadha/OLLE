@@ -30,11 +30,11 @@
                     Name:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputText id="firstname"	value="#{emegencybean.firstname}" size="18" />&#160;
-                    <p:watermark for="firstname" value="Firstname" />
+                    <p:inputText id="firstName"	value="#{emegencybean.firstName}" size="18" />&#160;
+                    <p:watermark for="firstName" value="Firstname" />
 
-                    <p:inputText id="lastname" value="#{emegencybean.lastname}" size="18" />
-                    <p:watermark for="lastname" value="Lastname" />
+                    <p:inputText id="lastName" value="#{emegencybean.lastName}" size="18" />
+                    <p:watermark for="lastName" value="Lastname" />
                 </p:column>
 
             </h:panelGrid>
@@ -45,28 +45,28 @@
                     Home Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="homephone" value="#{emergencybean.homephone}"
+                    <p:inputMask id="homePhone" value="#{emergencybean.homePhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Work Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="workphone" value="#{emergencybean.workphone}"
+                    <p:inputMask id="workPhone" value="#{emergencybean.workPhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Mobile Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="mobilephone" value="#{emergencybean.mobilephone}"
+                    <p:inputMask id="mobilePhone" value="#{emergencybean.mobilePhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
                 <p:column>
                     Other Phone:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputMask id="otherphone" value="#{emergencybean.otherphone}"
+                    <p:inputMask id="otherPhone" value="#{emergencybean.otherPhone}"
                                  mask="(999) 999-9999" size="12" style="vertical-align:middle;float:right;align:right;" />
                 </p:column>
 
@@ -77,33 +77,33 @@
 
             <h:panelGrid columns="1" style=" margin-left: 10px">    
                 <p:column>
-                    <p:inputText id="homeaddressline1"
-                                 value="#{emergencybean.homeaddressline1}" size="35" />
-                    <p:watermark for="homeaddressline1" value="Address Line 1" />
+                    <p:inputText id="addressLine1"
+                                 value="#{emergencybean.addressLine1}" size="35" />
+                    <p:watermark for="addressLine1" value="Address Line 1" />
                 </p:column>
                 <p:column>
-                    <p:inputText id="homeaddressline2"
-                                 value="#{emergencybean.homeaddressline2}" size="35" />
-                    <p:watermark for="homeaddressline2" value="Address Line 2" />
+                    <p:inputText id="addressLine2"
+                                 value="#{emergencybean.addressLine2}" size="35" />
+                    <p:watermark for="addressLine2" value="Address Line 2" />
                 </p:column>
                 <p:column>
                     <h:outputLabel value="" />
-                    <p:inputText id="homecity" value="#{emergencybean.homecity}" size="10" />&#160;
-                    <p:watermark for="homecity" value="City" />
+                    <p:inputText id="addressCity" value="#{emergencybean.addressCity}" size="10" />&#160;
+                    <p:watermark for="addressCity" value="City" />
                     <p:selectOneMenu id="homestate" value="#{selectOneViewMenu.state}"
                                      style="vertical-align:middle;" >
                         <f:selectItem itemLabel="Select State" itemValue="" />
                         <f:selectItems value="#{selectOneViewMenu.states}" />
                     </p:selectOneMenu>&#160;
 
-                    <p:inputText id="homezip" value="#{emergencybean.zip}"
+                    <p:inputText id="addressZip" value="#{emergencybean.addressZip}"
                                  size="4" />
-                    <p:watermark for="homezip" value="Zip" />
+                    <p:watermark for="addressZip" value="Zip" />
                 </p:column>
                 <p:column>
-                    <p:inputText id="homecountry" value="#{emergencybean.homecountry}"
+                    <p:inputText id="addressCountry" value="#{emergencybean.addressCountry}"
                                  size="12" />
-                    <p:watermark for="homecountry" value="Country" />
+                    <p:watermark for="addressCountry" value="Country" />
                 </p:column>
             </h:panelGrid>
         </h:form>

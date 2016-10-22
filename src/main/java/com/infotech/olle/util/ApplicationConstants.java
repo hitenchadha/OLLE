@@ -22,13 +22,14 @@ public interface ApplicationConstants {
 
     public static final String DELETEACCOUNT_URL = "/rest/account/deleteuseraccount/";
     public static final String GETACCOUNT_URL = "/rest/account/getuseraccountbyuserid/";
-
-    public static final String MANAGECONTACT_URL = "/rest/profile/ManageContact/";
     public static final String GETSPOUSE_URL = "/rest/profile/getspousebyuserid/";
     public static final String GETCHILD_URL = "/rest/profile/getchildbyuserid/";
     public static final String GETEMERGENCY_URL = "/rest/profile/getemergencybyuserid/";
     public static final String GETIDENTITY_URL = "/rest/profile/getidentitybyuserid/";
     public static final String GETCONTACT_URL = "/rest/profile/getcontactbyuserid/";
+    public static final String UPDATECONTACT_URL = "/rest/profile/updatecontact/";   
+    public static final String UPDATESPOUSE_URL = "/rest/profile/updatespouse/"; 
+    public static final String UPDATEIDENTITY_URL = "/rest/profile/updateidentity/"; 
 
     public static final String ACCOUNTEMAILADDRESS_URL = "/rest/account/emailaddress/";
     public static final String ACCOUNTHASHPHONE_URL = "/rest/account/hashphone/";

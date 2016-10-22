@@ -25,8 +25,12 @@ import static com.infotech.olle.util.ApplicationConstants.GETCONTACT_URL;
 import static com.infotech.olle.util.ApplicationConstants.GETEMERGENCY_URL;
 import static com.infotech.olle.util.ApplicationConstants.GETIDENTITY_URL;
 import static com.infotech.olle.util.ApplicationConstants.GETSPOUSE_URL;
+import static com.infotech.olle.util.ApplicationConstants.UPDATECONTACT_URL;
+import static com.infotech.olle.util.ApplicationConstants.UPDATEIDENTITY_URL;
+import static com.infotech.olle.util.ApplicationConstants.UPDATESPOUSE_URL;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
+import javax.faces.application.FacesMessage;
 
 @ManagedBean(name = "profilecontroller")
 @SessionScoped
@@ -155,7 +159,7 @@ public class ProfileController implements Serializable {
             // get Contact Object
             if (spouse.getUserid() == null) {
 
-                Gson gson = new GsonBuilder().create();
+                Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
                 String jsonSpouse = gson.toJson(account.getUserid());
                 URL url = new URL(SessionBean.getRequest().getScheme()
                         + "://" + SessionBean.getRequest().getServerName()
@@ -183,8 +187,8 @@ public class ProfileController implements Serializable {
                     jsonAPIResponse.append(output);
                 }
                 conn.disconnect();
-                Type objectType = new TypeToken<Spouse>() {
-                }.getType();
+                Type objectType = new TypeToken<Spouse>() {}.getType();
+                log.info("Reached here");
                 setSpouse((Spouse) gson.fromJson(jsonAPIResponse.toString(), objectType));
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("spousebean", spouse);
             }
@@ -232,8 +236,7 @@ public class ProfileController implements Serializable {
                     jsonAPIResponse.append(output);
                 }
                 conn.disconnect();
-                Type objectType = new TypeToken<Child>() {
-                }.getType();
+                Type objectType = new TypeToken<Child>() {}.getType();
                 setChild((Child) gson.fromJson(jsonAPIResponse.toString(), objectType));
                 FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("childbean", child);
             }
@@ -294,6 +297,126 @@ public class ProfileController implements Serializable {
             Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "emergency.xhtml?faces-redirect=true";
+    }
+    
+    public void updateContact() {
+
+        try {
+                    Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
+
+                    String jsonAccount = gson.toJson(contact);
+
+                    URL url = new URL(SessionBean.getRequest().getScheme()
+                            + "://" + SessionBean.getRequest().getServerName()
+                            + ":" + SessionBean.getRequest().getServerPort()
+                            + SessionBean.getRequest().getContextPath()
+                            + UPDATECONTACT_URL);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("PUT");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    OutputStream os = conn.getOutputStream();
+                    os.write(jsonAccount.getBytes());
+                    os.flush();
+                    if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                        throw new RuntimeException(
+                                "Failed : HTTP error code : "
+                                + conn.getResponseCode());
+                    }
+
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader((conn.getInputStream())));
+                    conn.disconnect();
+                    FacesContext context = FacesContext.getCurrentInstance();
+
+                    context.addMessage(null, new FacesMessage("Successful", "Success: " + "You have successfully updated your contact information."));
+                
+            
+        } catch (IOException | RuntimeException e) {
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+
+        }
+    }
+    
+    public void updateSpouse() {
+
+        try {
+                    Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
+
+                    String jsonAccount = gson.toJson(spouse);
+
+                    URL url = new URL(SessionBean.getRequest().getScheme()
+                            + "://" + SessionBean.getRequest().getServerName()
+                            + ":" + SessionBean.getRequest().getServerPort()
+                            + SessionBean.getRequest().getContextPath()
+                            + UPDATESPOUSE_URL);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("PUT");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    OutputStream os = conn.getOutputStream();
+                    os.write(jsonAccount.getBytes());
+                    os.flush();
+                    if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                        throw new RuntimeException(
+                                "Failed : HTTP error code : "
+                                + conn.getResponseCode());
+                    }
+
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader((conn.getInputStream())));
+                    conn.disconnect();
+                    FacesContext context = FacesContext.getCurrentInstance();
+
+                    context.addMessage(null, new FacesMessage("Successful", "Success: " + "You have successfully updated your spouse information."));
+                
+            
+        } catch (IOException | RuntimeException e) {
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+
+        }
+    }
+    
+    public void updateIdentity() {
+
+        try {
+                    Gson gson = new GsonBuilder().setDateFormat("EEE, dd MMM yyyy HH:mm:ss zzz").create();
+
+                    String jsonAccount = gson.toJson(identity);
+
+                    URL url = new URL(SessionBean.getRequest().getScheme()
+                            + "://" + SessionBean.getRequest().getServerName()
+                            + ":" + SessionBean.getRequest().getServerPort()
+                            + SessionBean.getRequest().getContextPath()
+                            + UPDATEIDENTITY_URL);
+
+                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("PUT");
+                    conn.setRequestProperty("Content-Type", "application/json");
+                    OutputStream os = conn.getOutputStream();
+                    os.write(jsonAccount.getBytes());
+                    os.flush();
+                    if (conn.getResponseCode() != HttpURLConnection.HTTP_CREATED) {
+                        throw new RuntimeException(
+                                "Failed : HTTP error code : "
+                                + conn.getResponseCode());
+                    }
+
+                    BufferedReader br = new BufferedReader(
+                            new InputStreamReader((conn.getInputStream())));
+                    conn.disconnect();
+                    FacesContext context = FacesContext.getCurrentInstance();
+
+                    context.addMessage(null, new FacesMessage("Successful", "Success: " + "You have successfully updated your identity information."));
+                
+            
+        } catch (IOException | RuntimeException e) {
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+
+        }
     }
 
     public void setContact(Contact contact) {

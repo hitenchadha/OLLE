@@ -14,11 +14,9 @@ import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
-
-    // mobile phone activation
-    // assign roles if account created via invitation
-    // audit trail
-
+// mobile phone activation
+// assign roles if account created via invitation
+// audit trail
 public class AccountService implements Serializable {
 
     private static final Logger log = Logger.getLogger(AccountService.class.getName());
@@ -35,6 +33,7 @@ public class AccountService implements Serializable {
 
     EntityManagerFactory emf;
     EntityManager em;
+
     // Constructor
     public AccountService() {
         emf = Persistence.createEntityManagerFactory("OLLE");
@@ -48,12 +47,22 @@ public class AccountService implements Serializable {
         try {
             em.persist(account);
             em.getTransaction().commit();
-            
-           Contact contact = new Contact();
-           contact.setUserid(account.getUserid());
-           contact.setMobilePhone(account.getPhone());
-           em.getTransaction().begin();
-           em.persist(contact);
+
+            Contact contact = new Contact();
+            contact.setUserid(account.getUserid());
+            contact.setMobilePhone(account.getPhone());
+            em.getTransaction().begin();
+            em.persist(contact);
+            em.getTransaction().commit();
+            Spouse spouse = new Spouse();
+            spouse.setUserid(account.getUserid());
+            em.getTransaction().begin();
+            em.persist(spouse);
+            em.getTransaction().commit();
+            Identity identity = new Identity();
+            identity.setUserid(account.getUserid());
+            em.getTransaction().begin();
+            em.persist(identity);
             em.getTransaction().commit();
             r = "1";
             return r;
@@ -81,7 +90,7 @@ public class AccountService implements Serializable {
             emf.close();
         }
     }
-    
+
     // update Account
     public boolean manageUserAccount(Integer userid, String attribute, String value, String ipaddress) {
         try {
@@ -115,23 +124,23 @@ public class AccountService implements Serializable {
             emf.close();
         }
     }
-    
+
     //Manage User Account
-    public boolean manageUserAccount (Account account) {
+    public boolean manageUserAccount(Account account) {
         try {
             em.merge(account);
             em.getTransaction().commit();
-            r="1";
+            r = "1";
             return true;
         } catch (Exception e) {
-            log.log(Level.INFO, "manageUserAccount: {0}",e.getMessage());
+            log.log(Level.INFO, "manageUserAccount: {0}", e.getMessage());
             return false;
         } finally {
             em.close();
             emf.close();
         }
     }
-    
+
     // Validate Email
     public String validateUserEmail(String emailaddress, String ipaddress) {
         try {
@@ -149,7 +158,7 @@ public class AccountService implements Serializable {
             emf.close();
         }
     }
-    
+
     // validate Username
     public String validateUsername(String username, String ipaddress) {
         log.log(Level.INFO, "Username PASSED: {0}", username);
@@ -190,22 +199,22 @@ public class AccountService implements Serializable {
     }
 
     // login
-    public UserSession authenticateUser(UserCredentials authenticate) throws Exception{
+    public UserSession authenticateUser(UserCredentials authenticate) throws Exception {
         UserSession uSession = new UserSession();
         try {
             String username = authenticate.getUsername();
             String password = authenticate.getPassword();
-            
+
             Query query = em.createNamedQuery("Account.findByUsernamePassword", Account.class).setParameter("password", password).setParameter("username", username);
-            log.info(username + " "  + password);
+            log.info(username + " " + password);
             List<Account> accountList = query.getResultList();
-            if (!accountList.isEmpty()) {                
+            if (!accountList.isEmpty()) {
                 Account account = accountList.get(0);
                 uSession.setUserId(account.getUserid());
                 uSession.setAccount(account);
             }
         } catch (Exception e) {
-            log.log(Level.SEVERE, "authenticateUser:{0} - e.getMessage()",e );
+            log.log(Level.SEVERE, "authenticateUser:{0} - e.getMessage()", e);
             throw e;
 
         } finally {

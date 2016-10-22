@@ -22,6 +22,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import java.text.SimpleDateFormat;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+ 
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
+
 /**
  *
  * @author hchadha
@@ -316,6 +323,19 @@ public class Identity implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+     
+    public void click() {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+         
+        requestContext.update("form:display");
+        requestContext.execute("PF('dlg').show()");
     }
     
 }

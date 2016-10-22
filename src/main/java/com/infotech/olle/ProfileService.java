@@ -16,9 +16,6 @@ public class ProfileService implements Serializable {
 
     private static final Logger log = Logger.getLogger(ProfileService.class.getName());
     private static final long serialVersionUID = 1L;
-    public String r = "0";
-    public String strMessage;
-    public String userid;
 
     EntityManagerFactory emf;
     EntityManager em;
@@ -29,26 +26,6 @@ public class ProfileService implements Serializable {
         em = emf.createEntityManager();
         em.getTransaction().begin();
 
-    }
-
-    // Activate Account
-    public String activateUserAccount(String activationkey, String ipaddress) {
-        try {
-            Query query = em.createNamedQuery("Account.findByActivationKey", Account.class).setParameter("activationKey", activationkey);
-            List<Account> accountList = query.getResultList();
-            for (Account account : accountList) {
-                account.setStatus(2);
-                em.persist(account);
-                em.getTransaction().commit();
-                r = "1";
-            }
-        } catch (Exception e) {
-            log.log(Level.SEVERE, "activateAccount:{0}", e.getMessage());
-        } finally {
-            em.close();
-            emf.close();
-        }
-        return r;
     }
 
     // login
@@ -145,5 +122,47 @@ public class ProfileService implements Serializable {
             emf.close();
         }
         return emergency;
+    }
+    
+    public boolean updateContact (Contact contact) {
+        try {
+            em.merge(contact);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            log.log(Level.INFO, "updateContact: {0}",e.getMessage());
+            return false;
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+    
+    public boolean updateSpouse (Spouse spouse) {
+        try {
+            em.merge(spouse);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            log.log(Level.INFO, "updateSpouse: {0}",e.getMessage());
+            return false;
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+        
+    public boolean updateIdentity (Identity identity) {
+        try {
+            em.merge(identity);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            log.log(Level.INFO, "updateIdentity: {0}",e.getMessage());
+            return false;
+        } finally {
+            em.close();
+            emf.close();
+        }
     }
 }

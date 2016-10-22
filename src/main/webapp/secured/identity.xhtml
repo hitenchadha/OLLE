@@ -16,7 +16,7 @@
                 <f:facet name="right">
                     <p:commandButton id="updatebuttontop" label="Update"
                                      type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
-                                     action="#{profilecontrollerbean.submitIdentity}" alt="Update" />
+                                     action="#{profilecontroller.updateIdentity()}" alt="Update" />
                 </f:facet>
             </p:toolbar>
 
@@ -58,7 +58,7 @@
                 </p:column>
                 <p:column>
                     <p:calendar id="birthCertificateIssueDate"
-                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true"
+                                value="#{identitybean.birthCertificateIssueDate}" pattern="MM-dd-yyyy" mask="true"
                                 size="15" />
                     <p:watermark for="birthCertificateIssueDate" value="Date" />&#160;
                 </p:column>
@@ -66,7 +66,7 @@
                     Birth Date:&#160;
                 </p:column>
                 <p:column>
-                    <p:calendar id="birthdayDate" value="#{calendarView.date9}"
+                    <p:calendar id="birthdayDate" value="#{identitybean.birthdayDate}"
                                 pattern="MM-dd-yyyy" mask="true" size="15" />
                     <p:watermark for="birthdayDate" value="Date" />
                 </p:column>
@@ -99,7 +99,7 @@
                 </p:column>
                 <p:column>
                     <p:calendar id="driverLicenseIssueDate"
-                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true" size="15" />
+                                value="#{identitybean.driverLicenseIssueDate}" pattern="MM-dd-yyyy" mask="true" size="15" />
                     <p:watermark for="driverLicenseIssueDate" value="Date" />
                 </p:column>
                 <p:column>
@@ -107,7 +107,7 @@
                 </p:column>
                 <p:column>
                     <p:calendar id="driverLicenseExpirationDate"
-                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true" size="15" />
+                                value="#{identitybean.driverLicenseExpirationDate}" pattern="MM-dd-yyyy" mask="true" size="15" />
                     <p:watermark for="driverLicenseExpirationDate" value="Date" />
                 </p:column>
             </h:panelGrid>
@@ -135,7 +135,7 @@
                     Issue Date:&#160;
                 </p:column>
                 <p:column>
-                    <p:calendar id="passportIssueDate" value="#{calendarView.date9}"
+                    <p:calendar id="passportIssueDate" value="#{identitybean.passportIssueDate}"
                                 pattern="MM-dd-yyyy" mask="true" size="15" />
                     <p:watermark for="passportIssueDate" value="Date" />&#160;
                 </p:column>
@@ -144,7 +144,7 @@
                 </p:column>
                 <p:column>
                     <p:calendar id="passportExpirationDate"
-                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true"
+                                value="#{identitybean.passportExpirationDate}" pattern="MM-dd-yyyy" mask="true"
                                 size="15" />
                     <p:watermark for="passportExpirationDate" value="Date" />
                 </p:column>

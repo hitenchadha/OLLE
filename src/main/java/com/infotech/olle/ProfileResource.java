@@ -90,6 +90,54 @@ public class ProfileResource extends Application {
         }
     }
     
+    @PUT
+    @Path("/updatecontact")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateContact(Contact contact) {
+        try{
+            ProfileService contactService = new ProfileService();
+            if (contactService.updateContact(contact))   
+                return Response.status(201).entity(true).build();
+            else
+                return Response.status(201).entity(false).build();
+        }catch(Exception e){
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+            return Response.status(500).entity(false).build();
+        }
+    }
+    
+    @PUT
+    @Path("/updatespouse")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateSpouse(Spouse spouse) {
+        try{
+            ProfileService contactService = new ProfileService();
+            if (contactService.updateSpouse(spouse))   
+                return Response.status(201).entity(true).build();
+            else
+                return Response.status(201).entity(false).build();
+        }catch(Exception e){
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+            return Response.status(500).entity(false).build();
+        }
+    }
+
+    @PUT
+    @Path("/updateidentity")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateIdentity(Identity identity) {
+        try{
+            ProfileService contactService = new ProfileService();
+            if (contactService.updateIdentity(identity))   
+                return Response.status(201).entity(true).build();
+            else
+                return Response.status(201).entity(false).build();
+        }catch(Exception e){
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+            return Response.status(500).entity(false).build();
+        }
+    }
+    
     // validate email address
     @GET
     @Path("/validateuseremail/{email}/{IPAddress}")

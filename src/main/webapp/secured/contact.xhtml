@@ -16,7 +16,7 @@
                 <f:facet name="right">
                     <p:commandButton id="updatebuttontop" label="Update"
                                      type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
-                                     action="#{contactbean.submit}" alt="Update"/>
+                                     action="#{profilecontroller.updateContact()}" alt="Update"/>
                 </f:facet>
             </p:toolbar>
 
@@ -61,7 +61,7 @@
                 </p:column>
                 <p:column>
                     <p:inputText id="homeemail" value="#{contactbean.homeEmail}"
-                                 validatorMessage="Invalid spouses personal email format"
+                                 validatorMessage="Invalid personal email format"
                                  size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -73,7 +73,7 @@
                 </p:column>
                 <p:column>
                     <p:inputText id="workemail" value="#{contactbean.workEmail}"
-                                 validatorMessage="Invalid spouses work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
+                                 validatorMessage="Invalid work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </p:inputText>

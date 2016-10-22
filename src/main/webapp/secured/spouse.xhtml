@@ -14,7 +14,7 @@
                 <f:facet name="right">
                     <p:commandButton id="updatebuttontop" label="Update"
                                      type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold" 
-                                     action="#{spousebean.submit}" alt="Update" />
+                                     action="#{profilecontroller.updateSpouse()}" alt="Update" />
                 </f:facet>
             </p:toolbar>
 
@@ -51,7 +51,7 @@
 
                 <p:column>Birth Date: </p:column>
                 <p:column>
-                    <p:calendar id="birthdayDate" value="#{calendarView.date9}"
+                    <p:calendar id="birthdayDate" value="#{spousebean.birthdayDate}"
                                 pattern="MM-dd-yyyy" mask="true" size="15" style="vertical-align:middle;float:right;align:right;" />
                     <p:watermark for="birthdayDate" value="Date" />
                 </p:column>
