@@ -31,8 +31,10 @@ public class AccountResource extends Application {
     public Response createUserAccount(Account account) {
         try {
             AccountService newAccount = new AccountService();
-            newAccount.createUserAccount(account);
-            return Response.status(201).entity(true).build();
+            if (newAccount.createUserAccount(account))
+                return Response.status(201).entity(true).build();
+            else 
+                return Response.status(500).entity(false).build();
         } catch (Throwable e) {
             log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
             return Response.status(500).entity(false).build();

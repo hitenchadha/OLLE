@@ -86,10 +86,10 @@ public class ProfileService implements Serializable {
         return spouse;
     }
     
-    public Child getChildByUserID(Integer userid) throws Exception {
+    public Child getChildByUserIDSeqNumber(Integer userid, Integer seqNumber) throws Exception {
         Child child = new Child();
         try {
-            Query query = em.createNamedQuery("Child.findByUserid", Child.class).setParameter("userid", userid);
+            Query query = em.createNamedQuery("Child.findByUserIDSeqNumber", Child.class).setParameter("userid", userid).setParameter("seqNumber", seqNumber);
             List<Child> childList = query.getResultList();
             if (!childList.isEmpty()) {
                 child = childList.get(0);
@@ -105,10 +105,10 @@ public class ProfileService implements Serializable {
         return child;
     }
     
-    public Emergency getEmergencyByUserID(Integer userid) throws Exception {
+    public Emergency getEmergencyByUserIDSeqNumber(Integer userid, Integer seqNumber) throws Exception {
         Emergency emergency = new Emergency();
         try {
-            Query query = em.createNamedQuery("Emergency.findByUserid", Emergency.class).setParameter("userid", userid);
+            Query query = em.createNamedQuery("Emergency.findByUserIDSeqNumber", Emergency.class).setParameter("userid", userid).setParameter("seqNumber", seqNumber);
             List<Emergency> emergencyList = query.getResultList();
             if (!emergencyList.isEmpty()) {
                 emergency = emergencyList.get(0);
@@ -159,6 +159,34 @@ public class ProfileService implements Serializable {
             return true;
         } catch (Exception e) {
             log.log(Level.INFO, "updateIdentity: {0}",e.getMessage());
+            return false;
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+    
+    public boolean updateChild (Child child) {
+        try {
+            em.merge(child);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            log.log(Level.INFO, "updateChild: {0}",e.getMessage());
+            return false;
+        } finally {
+            em.close();
+            emf.close();
+        }
+    }
+    
+     public boolean updateEmergency (Emergency emergency) {
+        try {
+            em.merge(emergency);
+            em.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            log.log(Level.INFO, "updateEmergency: {0}",e.getMessage());
             return false;
         } finally {
             em.close();

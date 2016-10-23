@@ -6,9 +6,12 @@
 package com.infotech.olle;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,6 +26,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  *
@@ -36,6 +41,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Child.findAll", query = "SELECT c FROM Child c"),
     @NamedQuery(name = "Child.findBySeqNumber", query = "SELECT c FROM Child c WHERE c.seqNumber = :seqNumber"),
+    @NamedQuery(name = "Child.findByUserIDSeqNumber", query = "SELECT c FROM Child c WHERE c.userid = :userid AND c.seqNumber = :seqNumber"),
     @NamedQuery(name = "Child.findByFirstName", query = "SELECT c FROM Child c WHERE c.firstName = :firstName"),
     @NamedQuery(name = "Child.findByMiddleName", query = "SELECT c FROM Child c WHERE c.middleName = :middleName"),
     @NamedQuery(name = "Child.findByLastName", query = "SELECT c FROM Child c WHERE c.lastName = :lastName"),
@@ -510,6 +516,19 @@ public class Child implements Serializable {
             return false;
         }
         return true;
+    }
+    
+    public void onDateSelect(SelectEvent event) {
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        facesContext.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Date Selected", format.format(event.getObject())));
+    }
+     
+    public void click() {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+         
+        requestContext.update("form:display");
+        requestContext.execute("PF('dlg').show()");
     }
     
 }

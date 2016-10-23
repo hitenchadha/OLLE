@@ -92,9 +92,9 @@
                                     <p:menuitem value="Spouse" icon="fa fa-heart"
                                                 action="#{profilecontroller.preLoadSpouse}" />
                                     <p:menuitem value="Child(ren)" icon="fa fa-child"
-                                                url="/secured/child.xhtml" />
+                                                action="#{profilecontroller.preLoadChild('1')}" />
                                     <p:menuitem value="Emergency contact" icon="fa fa-ambulance"
-                                                url="/secured/emergency.xhtml" />
+                                                action="#{profilecontroller.preLoadEmergency('1')}" />
                                 </p:submenu>
                             </p:menu>
                         </h:form>

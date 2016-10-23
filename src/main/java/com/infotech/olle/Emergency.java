@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Emergency.findByAddressState", query = "SELECT e FROM Emergency e WHERE e.addressState = :addressState"),
     @NamedQuery(name = "Emergency.findByAddressZip", query = "SELECT e FROM Emergency e WHERE e.addressZip = :addressZip"),
     @NamedQuery(name = "Emergency.findByAddressCountry", query = "SELECT e FROM Emergency e WHERE e.addressCountry = :addressCountry"),
+    @NamedQuery(name = "Emergency.findByUserIDSeqNumber", query = "SELECT e FROM Emergency e WHERE e.userid = :userid AND e.seqNumber = :seqNumber"),
     @NamedQuery(name = "Emergency.findBySeqNumber", query = "SELECT e FROM Emergency e WHERE e.seqNumber = :seqNumber")})
 public class Emergency implements Serializable {
 

@@ -65,12 +65,12 @@ public class ProfileResource extends Application {
     }
     
     @POST
-    @Path("/getchildbyuserid/{userid}")
+    @Path("/getchildbyuserid/{userid}/{seqnumber}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getChildByUserID(@PathParam("userid") Integer userid) {
+    public Response getChildByUserIDSeqNumber(@PathParam("userid") Integer userid, @PathParam("seqnumber") Integer seqNumber) {
         try{
             ProfileService childService = new ProfileService();
-            Child child = childService.getChildByUserID(userid);   
+            Child child = childService.getChildByUserIDSeqNumber(userid, seqNumber);   
             return Response.status(201).entity(child).build();
         }catch(Exception e){
             return Response.status(500).entity(false).build();
@@ -78,12 +78,12 @@ public class ProfileResource extends Application {
     }
     
     @POST
-    @Path("/getemergencybyuserid/{userid}")
+    @Path("/getemergencybyuserid/{userid}/{seqnumber}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getEmergencyByUserID(@PathParam("userid") Integer userid) {
+    public Response getEmergencyByUserID(@PathParam("userid") Integer userid, @PathParam("seqnumber") Integer seqNumber) {
         try{
             ProfileService emergencyService = new ProfileService();
-            Emergency emergency = emergencyService.getEmergencyByUserID(userid);   
+            Emergency emergency = emergencyService.getEmergencyByUserIDSeqNumber(userid, seqNumber);   
             return Response.status(201).entity(emergency).build();
         }catch(Exception e){
             return Response.status(500).entity(false).build();
@@ -127,8 +127,40 @@ public class ProfileResource extends Application {
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateIdentity(Identity identity) {
         try{
-            ProfileService contactService = new ProfileService();
-            if (contactService.updateIdentity(identity))   
+            ProfileService identityService = new ProfileService();
+            if (identityService.updateIdentity(identity))   
+                return Response.status(201).entity(true).build();
+            else
+                return Response.status(201).entity(false).build();
+        }catch(Exception e){
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+            return Response.status(500).entity(false).build();
+        }
+    }
+    
+    @PUT
+    @Path("/updatechild")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateChild(Child child) {
+        try{
+            ProfileService childService = new ProfileService();
+            if (childService.updateChild(child))   
+                return Response.status(201).entity(true).build();
+            else
+                return Response.status(201).entity(false).build();
+        }catch(Exception e){
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+            return Response.status(500).entity(false).build();
+        }
+    }
+    
+    @PUT
+    @Path("/updateemergency")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateEmergency(Emergency emergency) {
+        try{
+            ProfileService emergencyService = new ProfileService();
+            if (emergencyService.updateEmergency(emergency))   
                 return Response.status(201).entity(true).build();
             else
                 return Response.status(201).entity(false).build();

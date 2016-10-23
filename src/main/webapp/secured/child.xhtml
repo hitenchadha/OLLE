@@ -15,10 +15,10 @@
                 <f:facet name="right">
                     <p:commandButton id="addchildbuttontop" label="Add Child"
                                      type="submit" value="Add Child" icon="fa fa-child" class="LimeBack FontVoltBold"
-                                     action="#{childbean.addchild}" alt="Add Child" />
+                                     action="#{profilecontroller.addchild}" alt="Add Child" />
                     <p:commandButton id="updatebuttontop" label="Update"
                                      type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
-                                     action="#{childbean.submit}" alt="Update"/>
+                                     action="#{profilecontroller.updateChild()}" alt="Update"/>
 
                 </f:facet>
             </p:toolbar>
@@ -56,7 +56,7 @@
                 <p:column>Birth Certificate #: </p:column>
                 <p:column>
                     <p:inputText id="birthCertificateNumber"
-                                 value="#{identificationbean.birthCertificateNumber}" size="15" style="vertical-align:middle;float:right;align:right;" />&#160;
+                                 value="#{childbean.birthCertificateNumber}" size="15" style="vertical-align:middle;float:right;align:right;" />&#160;
                     <p:watermark for="birthCertificateNumber"
                                  value="Birth Certficate #" />
                 </p:column>
@@ -72,13 +72,13 @@
                 <p:column>Issue Date: </p:column>
                 <p:column>
                     <p:calendar id="birthCertificateIssueDate"
-                                value="#{calendarView.date9}" pattern="MM-dd-yyyy" mask="true"
+                                value="#{childbean.birthCertificateIssueDate}" pattern="MM-dd-yyyy" mask="true"
                                 size="15" style="vertical-align:middle;float:right;align:right;" />&#160;
                     <p:watermark for="birthCertificateIssueDate" value="Date" />
                 </p:column>
                 <p:column>Birth Date: </p:column>
                 <p:column>
-                    <p:calendar id="birthdayDate" value="#{calendarView.date9}"
+                    <p:calendar id="birthdayDate" value="#{childbean.birthdayDate}"
                                 pattern="MM-dd-yyyy" mask="true" size="15" style="vertical-align:middle;float:right;align:right;" />
                     <p:watermark for="birthdayDate" value="Date" />
                 </p:column>
@@ -139,7 +139,7 @@
                 </p:column>
                 <p:column>
                     <p:inputText id="homeEmail" value="#{childbean.homeEmail}"
-                                 validatorMessage="Invalid spouses personal email format"
+                                 validatorMessage="Invalid childs personal email format"
                                  size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
@@ -151,7 +151,7 @@
                 </p:column>
                 <p:column>
                     <p:inputText id="workEmail" value="#{childbean.workEmail}"
-                                 validatorMessage="Invalid spouses work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
+                                 validatorMessage="Invalid childs work email format" size="50" style="vertical-align:middle;float:right;align:right;" >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                     </p:inputText>

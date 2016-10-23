@@ -43,7 +43,7 @@ public class AccountService implements Serializable {
     }
 
     // create Account
-    public String createUserAccount(Account account) {
+    public boolean createUserAccount(Account account) {
         try {
             em.persist(account);
             em.getTransaction().commit();
@@ -64,15 +64,25 @@ public class AccountService implements Serializable {
             em.getTransaction().begin();
             em.persist(identity);
             em.getTransaction().commit();
-            r = "1";
-            return r;
+            Child child = new Child();
+            child.setUserid(account.getUserid());
+            em.getTransaction().begin();
+            em.persist(child);
+            em.getTransaction().commit();
+            Emergency emergency = new Emergency();
+            emergency.setUserid(account.getUserid());
+            em.getTransaction().begin();
+            em.persist(emergency);
+            em.getTransaction().commit();
+            
         } catch (Exception e) {
             log.log(Level.SEVERE, "createAccount:{0}", e.getMessage());
-            return r;
+            return false;
         } finally {
             em.close();
             emf.close();
         }
+        return true;
     }
 
     // delete Account

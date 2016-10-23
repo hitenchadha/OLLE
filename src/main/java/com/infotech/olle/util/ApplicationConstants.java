@@ -30,7 +30,9 @@ public interface ApplicationConstants {
     public static final String UPDATECONTACT_URL = "/rest/profile/updatecontact/";   
     public static final String UPDATESPOUSE_URL = "/rest/profile/updatespouse/"; 
     public static final String UPDATEIDENTITY_URL = "/rest/profile/updateidentity/"; 
-
+    public static final String UPDATECHILD_URL = "/rest/profile/updatechild/"; 
+    public static final String UPDATEEMERGENCY_URL = "/rest/profile/updateemergency/"; 
+    
     public static final String ACCOUNTEMAILADDRESS_URL = "/rest/account/emailaddress/";
     public static final String ACCOUNTHASHPHONE_URL = "/rest/account/hashphone/";
     public static final String ACCOUNTUSERNAME_URL = "/rest/account/username/";

@@ -15,10 +15,10 @@
                 <f:facet name="right">
                     <p:commandButton id="addemergencycontacttop" label="Add Emergency Contact"
                                      type="submit" value="Add Emergency Contact" icon="fa fa-ambulance"  class="LimeBack FontVoltBold"
-                                     action="#{emergencybean.addemergencycontact}" alt="Add Emergency Contact" />
+                                     action="#{profilecontroller.addemergencycontact}" alt="Add Emergency Contact" />
                     <p:commandButton id="updatebuttontop" label="Update"
                                      type="submit" value="Update" icon="fa fa-save"  class="LimeBack FontVoltBold"
-                                     action="#{emergencybean.submit}" alt="Update" />
+                                     action="#{profilecontroller.updateEmergency()}" alt="Update" />
 
                 </f:facet>
             </p:toolbar>
@@ -30,10 +30,10 @@
                     Name:&#160;
                 </p:column>
                 <p:column>
-                    <p:inputText id="firstName"	value="#{emegencybean.firstName}" size="18" />&#160;
+                    <p:inputText id="firstName"	value="#{emergencybean.firstName}" size="18" />&#160;
                     <p:watermark for="firstName" value="Firstname" />
 
-                    <p:inputText id="lastName" value="#{emegencybean.lastName}" size="18" />
+                    <p:inputText id="lastName" value="#{emergencybean.lastName}" size="18" />
                     <p:watermark for="lastName" value="Lastname" />
                 </p:column>
 
