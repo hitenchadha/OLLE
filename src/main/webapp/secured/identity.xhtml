@@ -23,9 +23,26 @@
             <p:messages id="messages" showDetail="true" autoUpdate="true" />
 
             <h3 ><i class="fa fa-phone Fs17" /> General</h3>
-            <h:panelGrid columns="1" style=" margin-left: 10px">
+            
+            <h:panelGrid columns="2" style=" margin-left: 10px">
+                <p:column>
+                    Name:&#160;
+                    </p:column>
+                <p:column>
+                <p:inputText id="firstName" value="#{identitybean.firstName}"
+                                 required="true" requiredMessage="Please enter firstname"
+                                 size="18">
+                        <p:watermark for="firstName" value="Firstname" /></p:inputText>&#160;
+<p:inputText id="middleName" value="#{identitybean.middleName}" size="18">
+                        <p:watermark for="middleName" value="Midllename" /></p:inputText>&#160;
+                        <p:inputText id="lastName" value="#{identitybean.lastName}"
+                                 required="true" requiredMessage="Please enter lastname" size="18" >
+                        <p:watermark for="lastName" value="Lastname" /> </p:inputText>
+                </p:column>
                 <p:column>
                     Social Security #:&#160;
+                    </p:column>
+                <p:column>
                     <p:inputMask id="ssn" value="#{identitybean.ssn}" size="18"
                                  mask="999-99-9999" />
                 </p:column>

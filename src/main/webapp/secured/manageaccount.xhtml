@@ -24,26 +24,9 @@
             <p:growl id="growl" showDetail="true" sticky="true" />
             <h:panelGrid id="tablegrid2" columns="2" cellpadding="5" cellspacing="5">
 
-                <p:column><h:outputLabel value="Name:" /> </p:column>
-                <p:column>
+                
 
-                    <p:inputText id="firstName" value="#{accountbean.firstName}"
-                                 required="true" requiredMessage="Please enter firstname"
-                                 size="18">
-                        <p:watermark for="firstName" value="Firstname" /></p:inputText>&#160;
-
-                        <p:inputText id="lastName" value="#{accountbean.lastName}"
-                                 required="true" requiredMessage="Please enter lastname" size="18" >
-                        <p:watermark for="lastName" value="Lastname" /> </p:inputText>
-                </p:column>
-
-                <p:column>	<h:outputLabel value="Mobile Phone:" /> </p:column>
-                <p:column colspan="2">
-                    <p:inputMask id="phone" value="#{accountbean.phone}"
-                                 mask="(999) 999-9999" size="18" /> 
-                </p:column>
-
-                <p:column>	<h:outputLabel for="emailaddress" value="Email:" /> </p:column>
+                <p:column>	<h:outputLabel for="email" value="Email:" /> </p:column>
                 <p:column colspan="2">
                     <p:inputText id="email" value="#{accountbean.email}"
                                  required="true" requiredMessage="Please enter your email"

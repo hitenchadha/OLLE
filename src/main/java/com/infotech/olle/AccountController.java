@@ -53,8 +53,14 @@ public class AccountController implements Serializable {
 
     @ManagedProperty(value = "#{accountbean}")
     private Account account;
+    @ManagedProperty(value = "#{contactbean}")
+    private Contact contact;
+    @ManagedProperty(value = "#{identitybean}")
+    private Identity identity;
     private static final Logger log = Logger.getLogger(AccountController.class.getName());
     private static final long serialVersionUID = 1L;
+    private String forgotOptions;
+    
     public boolean r;
 
     /**
@@ -72,18 +78,23 @@ public class AccountController implements Serializable {
         this.account = account;
     }
     
-    public void resetAccount(Account newAccount) {
-        account.setUserid(newAccount.getUserid());
-        account.setUsername(newAccount.getUsername());
-        account.setFirstName(newAccount.getFirstName());
-        account.setLastName(newAccount.getLastName());
-        account.setPhone(newAccount.getPhone());
-        account.setEmail(newAccount.getEmail());
-        account.setPassword(newAccount.getPassword());
-        account.setStatus(newAccount.getStatus());
-        account.setActivationKey(newAccount.getActivationKey());
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+    
+    public void setIdentity(Identity identity) {
+        this.identity = identity;
     }
 
+    public String getForgotOptions() {
+        return forgotOptions;
+    }
+
+    public void setForgotOptions(String forgotOptions) {
+        this.forgotOptions = forgotOptions;
+    }
+    
+    
     // AJAX call from JSF page on blur event
     public boolean validateUserEmail() {
         try {
@@ -96,7 +107,7 @@ public class AccountController implements Serializable {
                 if (jObj.getString("r").equals("1")) {
                     FacesContext.getCurrentInstance()
                             .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                    "Email taken:", "Email is already in use. Please enter a different email."));
+                                    "Email taken: ", "Email is already in use. Please enter a different email."));
                     return false;
                 }
             }
@@ -109,7 +120,7 @@ public class AccountController implements Serializable {
             try {
                 FacesContext.getCurrentInstance()
                         .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                "Generic Error:", "A general error occurred. Please try again later."));
+                                "Generic Error: ", "A general error occurred. Please try again later."));
             } catch (Exception e) {
                 log.log(Level.SEVERE, "FacesContext Exception: ", e.getMessage());
 
@@ -132,7 +143,7 @@ public class AccountController implements Serializable {
                 if (jObj.getString("r").equals("1")) {
                     FacesContext.getCurrentInstance()
                             .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                    "Username taken:", "Username is already in use. Please enter a different username."));
+                                    "Username taken: ", "Username is already in use. Please enter a different username."));
                     return false;
                 }
             }
@@ -145,7 +156,7 @@ public class AccountController implements Serializable {
             try {
                 FacesContext.getCurrentInstance()
                         .addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                "Generic Error:", "A general error occurred. Please try again later."));
+                                "Generic Error: ", "A general error occurred. Please try again later."));
             } catch (Exception e) {
                 log.log(Level.SEVERE, "FacesContext Exception: ", e.getMessage());
                 return true;
@@ -228,7 +239,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                            "Activation Key Expired:",
+                                            "Activation Key Expired: ",
                                             "Activation Key has expired. Please click here to request a new activation key."));
                     break;
                 case "3":
@@ -236,7 +247,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                            "Account already activated:",
+                                            "Account already activated: ",
                                             "Please click here to re-activate account."));
                     break;
                 default:
@@ -244,7 +255,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                            "Invalid Activation Key:",
+                                            "Invalid Activation Key: ",
                                             "Activation Key used by you is invalid. Please verify and try again."));
                     break;
             }
@@ -296,7 +307,16 @@ public class AccountController implements Serializable {
 
             Type sessionType = new TypeToken<UserSession>() {}.getType();
             UserSession uSession = (UserSession) gson.fromJson(jsonAPIResponse.toString(), sessionType);
-            resetAccount(uSession.getAccount());
+
+            account.setUserid(uSession.getAccount().getUserid());
+            account.setUsername(uSession.getAccount().getUsername());
+            identity.setFirstName(uSession.getIdentity().getFirstName());
+            identity.setLastName(uSession.getIdentity().getLastName());
+            contact.setMobilePhone(uSession.getContact().getMobilePhone());
+            account.setEmail(uSession.getAccount().getEmail());
+            account.setPassword(uSession.getAccount().getPassword());
+            account.setStatus(uSession.getAccount().getStatus());
+            account.setActivationKey(uSession.getAccount().getActivationKey());
             
             switch (account.getStatus()) {
                 case 2:
@@ -311,7 +331,7 @@ public class AccountController implements Serializable {
                         return targetURI;
                     } else {
                         log.log(Level.INFO, "sessionbeanURI{0}", SessionBean.getRequestURI());
-                        return SessionBean.getRequestURI()+ "?faces-redirect=true";
+                        return SessionBean.getRequestURI() + "?faces-redirect=true";
                         // return SessionBean.getRequestURI().replace("OLLE/", "") + "?faces-redirect=true";
                     }
                 case 1:
@@ -320,7 +340,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                            "Inactive account",
+                                            "Inactive account: ",
                                             "You have not activated the account. Click here to activate the account."));
                     return "login.xhtml";
                 case 3:
@@ -329,7 +349,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                            "Locked account",
+                                            "Locked account: ",
                                             "Your account is currently locked. Click here to activate the account."));
                     return "login.xhtml";
                 case 4:
@@ -338,7 +358,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                            "Expired account",
+                                            "Expired account: ",
                                             "Your account has expired. Click here to activate the account."));
                     return "login.xhtml";
                 case 5:
@@ -347,7 +367,7 @@ public class AccountController implements Serializable {
                             .addMessage(
                                     null,
                                     new FacesMessage(FacesMessage.SEVERITY_WARN,
-                                            "Deleted account",
+                                            "Deleted account: ",
                                             "Your account has been deleted. Please contact the administrator."));
                     return "login.xhtml";
                 default:
@@ -366,28 +386,14 @@ public class AccountController implements Serializable {
                             "Invalid Username/Password: ",
                             "Please login with correct credentials."));
             log.log(Level.SEVERE, "Exception Logged: ", e.getMessage());
-
-            //TEMP:
-            /*HttpSession userSession = SessionBean.getSession();
-			userSession.setAttribute("username", StringEscapeUtils.escapeHtml4(account.getUsername().trim().toUpperCase()));
-			userSession.setAttribute("uid", account.getUid());
-			userSession.setAttribute("firstname", account.getFirstname());
-			userSession.setAttribute("middlename", account.getMiddlename());
-			userSession.setAttribute("lastname", account.getLastname());
-			// userSession.setAttribute("password", jObj.get("password"));
-			userSession.setAttribute("mobilephone", account.getMobilephone());
-			userSession.setAttribute("email", account.getEmailaddress());
-			if (SessionBean.getRequestURI() == null)
-				return targetURI;
-			else 
-				return SessionBean.getRequestURI();*/
-        } catch (Exception ex) {
+        } catch (RuntimeException ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return "login";
     }
-/*
+
+    
     public String forgotCredentials() {
         try {
             String email = account.getEmail();
@@ -398,27 +404,33 @@ public class AccountController implements Serializable {
             JSONObject jObj = new JSONObject(strJSONValue);
 
             if (jObj.getString("r").equals("1")) {
-                log.log(Level.INFO, "Forgot: ", forgot);
-                switch (forgot) {
+                log.log(Level.INFO, "Forgot: ", forgotOptions);
+                switch (forgotOptions) {
                     case "Username": {
                         Mail mail = new Mail();
-                        mail.sendUserName(email, "Name", SessionBean.getUserName());
+                        mail.sendUserName(email, "Name", account.getUsername());
                         break;
                     }
                     case "Password": {
                         Mail mail = new Mail();
-                        mail.sendPassword(email, "Name", SessionBean.getUserName());
+                        mail.sendPassword(email, "Name", account.getUsername());
                         break;
                     }
                     case "Both": {
                         Mail mail = new Mail();
-                        mail.sendUserName(email, "Name", SessionBean.getUserName());
+                        mail.sendUserName(email, "Name", account.getUsername());
                         mail.sendPassword(email, "Name", "Password");
                         break;
                     }
                     default:
                         break;
                 }
+                FacesContext.getCurrentInstance().addMessage(
+                            null,
+                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                    "Email Sent: ",
+                                    "Please check for an email in your mailbox. Follow instructions in the email."));
+                    
 
             } else {
                 FacesContext
@@ -426,17 +438,15 @@ public class AccountController implements Serializable {
                         .addMessage(
                                 null,
                                 new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                                        "Account not found:",
+                                        "Account not found: ",
                                         "There is no account registered with the email address provided."));
             }
-        } catch (JSONException ex) {
-            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
+        } catch (JSONException | IOException ex) {
             Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return forgot;
+        return "login.xhtml";
     }
-*/
+    
     public void manageUserAccount() {
         // String targetURI = "manageaccount.xhtml";
         try {
@@ -479,7 +489,7 @@ public class AccountController implements Serializable {
             account = new Account();
             FacesContext context = FacesContext.getCurrentInstance();
 
-            context.addMessage(null, new FacesMessage("Successful", "Success: " + "You have successfully updated your account"));
+            context.addMessage(null, new FacesMessage("Success: ", "You have updated your account!"));
 
         } catch (IOException e) {
             log.log(Level.SEVERE, "Exception Logged: ", e.getMessage());

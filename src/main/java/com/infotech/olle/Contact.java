@@ -64,6 +64,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Contact implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     @Size(max = 14)
     @Column(name = "\"HOME_PHONE\"")
     private String homePhone;
@@ -166,7 +167,7 @@ public class Contact implements Serializable {
     public Contact(Integer userid) {
         this.userid = userid;
     }
-
+    
     public String getHomePhone() {
         return homePhone;
     }

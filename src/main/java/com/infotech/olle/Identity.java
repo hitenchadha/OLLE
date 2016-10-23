@@ -69,6 +69,19 @@ public class Identity implements Serializable {
     @NotNull
     @Column(name = "\"USERID\"")
     private Integer userid;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 25)
+    @Column(name = "\"FIRST_NAME\"")
+    private String firstName;
+    @Size(max = 30)
+    @Column(name = "\"MIDDLE_NAME\"")
+    private String middleName;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 30)
+    @Column(name = "\"LAST_NAME\"")
+    private String lastName;
     @Size(max = 11)
     @Column(name = "\"SSN\"")
     private String ssn;
@@ -143,6 +156,31 @@ public class Identity implements Serializable {
 
     public void setUserid(Integer userid) {
         this.userid = userid;
+    }
+    
+    
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getSsn() {

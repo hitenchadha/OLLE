@@ -6,6 +6,8 @@
 package com.infotech.olle.util;
 
 import com.infotech.olle.Account;
+import com.infotech.olle.Contact;
+import com.infotech.olle.Identity;
 
 /**
  *
@@ -16,6 +18,8 @@ public class UserSession {
     private String apiKey;
     private int userId;
     private Account account;
+    private Contact contact;
+    private Identity identity;
     
     public UserSession(){
       apiKey = "APIKEY-"+String.valueOf(Math.random());
@@ -44,5 +48,23 @@ public class UserSession {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public Identity getIdentity() {
+        return identity;
+    }
+
+    public void setIdentity(Identity identity) {
+        this.identity = identity;
+    }
+    
+    
     
 }

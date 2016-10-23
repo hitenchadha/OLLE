@@ -61,6 +61,8 @@ public class AccountService implements Serializable {
             em.getTransaction().commit();
             Identity identity = new Identity();
             identity.setUserid(account.getUserid());
+            identity.setFirstName(account.getFirstName());
+            identity.setLastName(account.getLastName());
             em.getTransaction().begin();
             em.persist(identity);
             em.getTransaction().commit();
@@ -218,11 +220,19 @@ public class AccountService implements Serializable {
             Query query = em.createNamedQuery("Account.findByUsernamePassword", Account.class).setParameter("password", password).setParameter("username", username);
             log.info(username + " " + password);
             List<Account> accountList = query.getResultList();
+            
             if (!accountList.isEmpty()) {
                 Account account = accountList.get(0);
                 uSession.setUserId(account.getUserid());
                 uSession.setAccount(account);
+                query = em.createNamedQuery("Identity.findByUserid", Identity.class).setParameter("userid", account.getUserid());
+                List<Identity> identityList = query.getResultList();
+                uSession.setIdentity(identityList.get(0));
+                query = em.createNamedQuery("Contact.findByUserid", Contact.class).setParameter("userid", account.getUserid());
+                List<Contact> contactList = query.getResultList();               
+                uSession.setContact(contactList.get(0));
             }
+
         } catch (Exception e) {
             log.log(Level.SEVERE, "authenticateUser:{0} - e.getMessage()", e);
             throw e;
