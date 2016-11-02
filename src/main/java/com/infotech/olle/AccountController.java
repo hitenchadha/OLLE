@@ -312,7 +312,7 @@ public class AccountController implements Serializable {
             account.setUsername(uSession.getAccount().getUsername());
             identity.setFirstName(uSession.getIdentity().getFirstName());
             identity.setLastName(uSession.getIdentity().getLastName());
-            contact.setMobilePhone(uSession.getContact().getMobilePhone());
+            // contact.setMobilePhone(uSession.getContact().getMobilePhone());
             account.setEmail(uSession.getAccount().getEmail());
             account.setPassword(uSession.getAccount().getPassword());
             account.setStatus(uSession.getAccount().getStatus());

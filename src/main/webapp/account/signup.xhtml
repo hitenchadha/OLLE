@@ -14,7 +14,7 @@
                 <f:facet name="right">
                     <p:commandButton id="updatebuttontop" label="Signup"
                                      type="submit" value="Signup" icon="fa fa-save"  class="LimeBack FontVoltBold"
-                                     action="#{accountcontroller.createAccount}" alt="Update"/>
+                                     action="#{profilecontroller.createAccount}" alt="Update"/>
 
                 </f:facet>
             </p:toolbar>
@@ -26,53 +26,53 @@
                 <p:column><h:outputLabel value="Name:" /> </p:column>
                 <p:column>
 
-                    <p:inputText id="firstName" value="#{accountbean.firstName}"
+                    <p:inputText id="firstName" value="#{profilemb.firstName}"
                                  required="true" requiredMessage="Please enter first name"
                                  size="18">
                         <p:watermark for="firstName" value="Firstname" /></p:inputText>&#160;
 
-                    <p:inputText id="lastName" value="#{accountbean.lastName}"
+                    <p:inputText id="lastName" value="#{profilemb.lastName}"
                                  required="true" requiredMessage="Please enter last name" size="18" >
                         <p:watermark for="lastName" value="Lastname" /> </p:inputText>
                 </p:column>
 
                 <p:column>	<h:outputLabel value="Mobile Phone:" /> </p:column>
                 <p:column colspan="2">
-                    <p:inputMask id="mobilephone" value="#{accountbean.phone}"
+                    <p:inputMask id="mobilephone" value="#{profilemb.phone}"
                                  mask="(999) 999-9999" size="18" /> 
                 </p:column>
 
                 <p:column>	<h:outputLabel for="email" value="Email:" /> </p:column>
                 <p:column colspan="2">
-                    <p:inputText id="email" value="#{accountbean.email}"
+                    <p:inputText id="email" value="#{profilemb.email}"
                                  required="true" requiredMessage="Please enter your email"
                                  validatorMessage="Invalid email format" size="50"  >
                         <f:validateRegex
                             pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                        <p:ajax event="blur" listener="#{accountcontroller.validateUserEmail()}"
+                        <p:ajax event="blur" listener="#{profilecontroller.validateUserEmail()}"
                                 update="messages" />
                     </p:inputText> 
                 </p:column>
 
             </h:panelGrid>
-            <i class="fa fa-info-circle Fs17" /> <h:outputLabel value=" Username and Password should be at least 8 characters long." />
+            <i class="fa fa-info-circle Fs17" /> <h:outputLabel value=" Username and Password should be ßat least 8 characters long." />
 
 
             <h:panelGrid id="tablegrid1" columns="2" cellpadding="5" cellspacing="5">
                 <p:column><h:outputLabel for="username" value="Username:" /></p:column>
                 <p:column>
-                    <p:inputText id="username" value="#{accountbean.username}"
+                    <p:inputText id="username" value="#{profilemb.username}"
                                  required="true" requiredMessage="Please enter username"
                                  validatorMessage="Username should be at least 8 characters long"
                                  size="18">
                         <f:validateLength minimum="8" />
-                        <p:ajax event="blur" listener="#{accountcontroller.validateUsername()}"
+                        <p:ajax event="blur" listener="#{profilecontroller.validateUsername()}"
                                 update="messages" />
                     </p:inputText>
                 </p:column>
 
                 <p:column><h:outputLabel for="password" value="Password:" /></p:column>
-                <p:column><p:password id="password" value="#{accountbean.password}"
+                <p:column><p:password id="password" value="#{profilemb.password}"
                                       required="true" requiredMessage="Please enter password"
                                       feedback="true"
                                       validatorMessage="Password should be at least 8 characters long"

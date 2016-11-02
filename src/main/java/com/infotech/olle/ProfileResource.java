@@ -170,83 +170,55 @@ public class ProfileResource extends Application {
         }
     }
     
+    // create new account
+    @POST
+    @Path("/createuserprofile/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response createUserAccount(Profile profile) {
+        try {
+            ProfileService profileService = new ProfileService();
+            if (profileService.createUserProfile(profile))
+                return Response.status(201).entity(true).build();
+            else 
+                return Response.status(500).entity(false).build();
+        } catch (Throwable e) {
+            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
+            return Response.status(500).entity(false).build();
+        }
+
+    }
+    
     // validate email address
     @GET
-    @Path("/validateuseremail/{email}/{IPAddress}")
+    @Path("/validateuseremail/{email}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AccountService validateUserEmail(
-            @PathParam("email") String email,
-            @PathParam("IPAddress") String ipaddress) {
-        AccountService serviceAccount = new AccountService();
-        serviceAccount.validateUserEmail(email, ipaddress);
-        return serviceAccount;
+    public ProfileService validateUserEmail(
+            @PathParam("email") String email) {
+        ProfileService serviceProfile = new ProfileService();
+        serviceProfile.validateUserEmail(email);
+        return serviceProfile;
 
     }
 
     // validate username
     @GET
-    @Path("/validateusername/{username}/{IPAddress}")
+    @Path("/validateusername/{username}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AccountService validateUsername(
-            @PathParam("username") String username,
-            @PathParam("IPAddress") String ipaddress) {
-        AccountService serviceAccount = new AccountService();
-        serviceAccount.validateUsername(username, ipaddress);
-        return serviceAccount;
+    public ProfileService validateUsername(@PathParam("username") String username) {
+        ProfileService serviceProfile = new ProfileService();
+        serviceProfile.validateUsername(username);
+        return serviceProfile;
 
     }
 
     // Activate Account 
     @GET
-    @Path("/activateuseraccount/{activationKey}/{IPAddress}")
+    @Path("/activateuseraccount/{activationKey}")
     @Produces(MediaType.APPLICATION_JSON)
-    public AccountService activateUserAccount(
-            @PathParam("activationKey") String activationKey,
-            @PathParam("IPAddress") String ipaddress) {
-        AccountService serviceAccount = new AccountService();
-        serviceAccount.activateUserAccount(activationKey, ipaddress);
-        return serviceAccount;
-    }
-
-    
-
-
-    @PUT
-    @Path("/manageuseraccount/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response manageUserAccount(Account account) {
-        try {
-            AccountService serviceAccount = new AccountService();
-            serviceAccount.manageUserAccount(account);
-            return Response.status(201).entity(true).build();
-        } catch (Throwable e) {
-            log.log(Level.SEVERE, " Exception:{0}" + e.getMessage(), e);
-            return Response.status(500).entity(false).build();
-        }
-    }
-
-    // Remove Object
-    @GET
-    @Path("/deleteuseraccount/{userid}/{IPAddress}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteUserAccount(
-            @PathParam("userid") Integer userid,
-            @PathParam("IPAddress") String ipaddress) {
-        AccountService accountService = new AccountService();
-        if (accountService.deleteUserAccount(userid, ipaddress)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    // Remove Object
-    @DELETE
-    @Path("/RemoveAccount/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean deleteAccount(Account account) {
-        account.setStatus(5);
-        AccountService accountService = new AccountService();
-        return accountService.manageUserAccount(account);
+    public ProfileService activateUserAccount(
+            @PathParam("activationKey") String activationKey) {
+        ProfileService serviceProfile = new ProfileService();
+        serviceProfile.activateUserAccount(activationKey);
+        return serviceProfile;
     }
 }

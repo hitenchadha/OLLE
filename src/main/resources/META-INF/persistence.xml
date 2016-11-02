@@ -2,12 +2,16 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="OLLE" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>com.infotech.olle.Contact</class>
     <class>com.infotech.olle.Account</class>
     <class>com.infotech.olle.Identity</class>
     <class>com.infotech.olle.Spouse</class>
     <class>com.infotech.olle.Emergency</class>
     <class>com.infotech.olle.Child</class>
+    <class>com.infotech.olle.Account_1</class>
+    <class>com.infotech.olle.Child_1</class>
+    <class>com.infotech.olle.Contact</class>
+    <class>com.infotech.olle.Profile</class>
+    <class>com.infotech.olle.Contact</class>
     <properties>
       <!--
             <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/sample"/>

@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ws.rs.ApplicationPath;
 
-@ApplicationPath("rest")
+@ApplicationPath("rest1")
 
 @Path("/account")
 public class AccountResource extends Application {

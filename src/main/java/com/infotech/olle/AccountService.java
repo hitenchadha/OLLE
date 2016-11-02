@@ -49,8 +49,8 @@ public class AccountService implements Serializable {
             em.getTransaction().commit();
 
             Contact contact = new Contact();
-            contact.setUserid(account.getUserid());
-            contact.setMobilePhone(account.getPhone());
+            // contact.setUserid(account.getUserid());
+            // contact.setMobilePhone(account.getPhone());
             em.getTransaction().begin();
             em.persist(contact);
             em.getTransaction().commit();

@@ -11,17 +11,17 @@ package com.infotech.olle.util;
  */
 public interface ApplicationConstants {
 
-    public static final String ACCOUNT_URL = "/rest/account/";
-    public static final String SIGNUP_URL = "/rest/account/createuseraccount/";
-    public static final String LOGIN_URL = "/rest/account/login/";
-    public static final String FORGOTCREDENTIAL_URL = "/rest/account/forgotcredential/";
-    public static final String MANAGEACCOUNT_URL = "/rest/account/manageuseraccount/";
-    public static final String VALIDATEEMAIL_URL = "/rest/account/validateuseremail/";
-    public static final String VALIDATEUSERNAME_URL = "/rest/account/validateusername/";
-    public static final String ACCOUNTACTIVATE_URL = "/rest/account/activateuseraccount/";
+    public static final String ACCOUNT_URL = "/rest/profile/";
+    public static final String SIGNUP_URL = "/rest/profile/createuserprofile/";
+    public static final String LOGIN_URL = "/rest/profile/login/";
+    public static final String FORGOTCREDENTIAL_URL = "/rest/profile/forgotcredential/";
+    public static final String MANAGEACCOUNT_URL = "/rest/profile/manageuseraccount/";
+    public static final String VALIDATEEMAIL_URL = "/rest/profile/validateuseremail/";
+    public static final String VALIDATEUSERNAME_URL = "/rest/profile/validateusername/";
+    public static final String ACCOUNTACTIVATE_URL = "/rest/profile/activateuseraccount/";
 
-    public static final String DELETEACCOUNT_URL = "/rest/account/deleteuseraccount/";
-    public static final String GETACCOUNT_URL = "/rest/account/getuseraccountbyuserid/";
+    public static final String DELETEACCOUNT_URL = "/rest/profile/deleteuseraccount/";
+    public static final String GETACCOUNT_URL = "/rest/profile/getuseraccountbyuserid/";
     public static final String GETSPOUSE_URL = "/rest/profile/getspousebyuserid/";
     public static final String GETCHILD_URL = "/rest/profile/getchildbyuserid/";
     public static final String GETEMERGENCY_URL = "/rest/profile/getemergencybyuserid/";
@@ -33,9 +33,9 @@ public interface ApplicationConstants {
     public static final String UPDATECHILD_URL = "/rest/profile/updatechild/"; 
     public static final String UPDATEEMERGENCY_URL = "/rest/profile/updateemergency/"; 
     
-    public static final String ACCOUNTEMAILADDRESS_URL = "/rest/account/emailaddress/";
-    public static final String ACCOUNTHASHPHONE_URL = "/rest/account/hashphone/";
-    public static final String ACCOUNTUSERNAME_URL = "/rest/account/username/";
+    public static final String ACCOUNTEMAILADDRESS_URL = "/rest/profile/emailaddress/";
+    public static final String ACCOUNTHASHPHONE_URL = "/rest/profile/hashphone/";
+    public static final String ACCOUNTUSERNAME_URL = "/rest/profile/username/";
     public static final String ACCOUNTGETACCOUNT_URL = "/rest/account/getaccount/";
 
     public static final String FORMS_URL = "/rest/Forms/";

@@ -34,8 +34,8 @@ public class ConsumeJSON implements Serializable {
                     .getScheme() + "://"
                     + SessionBean.getRequest().getServerName() + ":"
                     + SessionBean.getRequest().getServerPort()
-                    + SessionBean.getRequest().getContextPath() + strURL + strQuery
-                    + "/" + SessionBean.getRequest().getRemoteAddr();
+                    + SessionBean.getRequest().getContextPath() + strURL + strQuery;
+                    // + "/" + SessionBean.getRequest().getRemoteAddr();
             if (blnSSL) {
                 InputStream is = trustHTTPS(uri);
                 // String IPAddress = request.getRemoteAddr();
